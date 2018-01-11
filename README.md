@@ -1,4 +1,4 @@
-#CodeBarreBattler
+# CodeBarreBattler
 
 ## Auteurs
 
@@ -9,10 +9,10 @@ Aïchatou Traoré
 
 Développez une application android sur le même principe que la console vintage “Barcode Battler”.  
 Il s’agit donc de concevoir un jeu qui permet :  
-* Gérer ses créatures et équipements (ajouter / supprimer / ….)
-* Ajoute des créatures / équipements / potions  en scannant des codes barres
-* Lancer un combat en local en faisant affronter deux créatures sur le même téléphone
-* Lancer un combat en réseau 
+* Gérer ses créatures et équipements (ajouter / supprimer / ….).
+* Ajoute des créatures / équipements / potions  en scannant des codes barres.
+* Lancer un combat en local en faisant affronter deux créatures sur le même téléphone.
+* Lancer un combat en réseau.  
 
 
 
@@ -32,3 +32,20 @@ Serialisation/Deserialisation : 2 points
 Combat local fonctionnel : 2 points   
 Combat réseau fonctionnel : 2 points  
 Bonus implication : 6 points  
+
+## Decoupage Et Répartition Des Tâches
+
+Par ordre de priorité :
+* Main_activity ()
+* Définir les models de données ()
+* Scanner des code-barre pour ajouter des créatures / équipements / potions. ()
+* Ajouter les ressources images. (Tom Phily)
+* Gérer ses créatures et équipements (ajouter / supprimer / ...) :
+** lister les créatures / les équipements / les potions / supprimer une créature / un équipement / une potion, ()
+** modifier une créature / ajouter un équipement / lister les équipements disponibles, ()
+* Effectuer un combat. ()
+* Lancer combat local. ()
+* Lancer combat réseau. ()
+
+## Relation Entre Activity
+
