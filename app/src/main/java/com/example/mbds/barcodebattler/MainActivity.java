@@ -17,7 +17,7 @@ import com.google.zxing.integration.android.IntentResult;
 
 public class MainActivity extends AppCompatActivity {
     //ImageView image;
-    private Button button ,gestion ;
+    private Button button ,gestion ,local,reseau;
 
 
     @Override
@@ -48,6 +48,23 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent,2);
             }
         });
+        local= (Button) findViewById(R.id.localId);
+        local.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,ChoixLocal.class);
+                startActivityForResult(intent,2);
+            }
+        });
+        reseau= (Button) findViewById(R.id.reseauId);
+        reseau.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,ChoixReseau.class);
+                startActivityForResult(intent,2);
+            }
+        });
+       
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
