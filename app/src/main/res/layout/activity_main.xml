@@ -1,8 +1,9 @@
-<LinearLayout
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context="com.example.mbds.barcodebattler.MainActivity">
 
     <TableLayout
         android:layout_width="match_parent"
@@ -67,7 +68,7 @@
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/button3"
+                    android:id="@+id/localId"
                     android:background="@drawable/right_buttom_btn_line"
                     android:text="Local"
                     android:textSize="18sp"
@@ -86,7 +87,7 @@
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/button4"
+                    android:id="@+id/reseauId"
                     android:background="@drawable/right_buttom_btn_line"
                     android:text="Réseaux"
                     android:textSize="18sp"

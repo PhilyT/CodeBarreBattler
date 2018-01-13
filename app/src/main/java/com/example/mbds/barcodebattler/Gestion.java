@@ -25,7 +25,7 @@ public class Gestion extends AppCompatActivity {
         setContentView(R.layout.activity_gestion);
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        String[] items = new String[] { "Creatures", "Equipements", "Potion"  };
+        String[] items = new String[] { "Creatures", "Equipements", "Potions"  };
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinner.setAdapter(adapter);
