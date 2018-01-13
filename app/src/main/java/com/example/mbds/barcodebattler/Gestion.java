@@ -58,6 +58,7 @@ public class Gestion extends AppCompatActivity {
                 else if(item.equalsIgnoreCase("Potions")){
                   points=  (TextView) findViewById(R.id.points);
                     points.setText(" Reserve de potion"+potion);
+                    mListView.setVisibility(View.INVISIBLE);
 
 
                 }
