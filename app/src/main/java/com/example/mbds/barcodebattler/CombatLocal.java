@@ -1,5 +1,7 @@
 package com.example.mbds.barcodebattler;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +9,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.util.Random;
 
 public class CombatLocal extends AppCompatActivity {
 
@@ -56,12 +60,80 @@ public class CombatLocal extends AppCompatActivity {
         // Custom Composant
         setMenu();
         title.setText("Combat Local");
-        pv1.setText("PV restant : "+creature1.PV);
-        pv2.setText("PV restant : "+creature2.PV);
+        refreshComposant();
         nom1.setText(creature1.Nom);
         nom2.setText(creature2.Nom);
         image1.setImageBitmap(creature1.Image);
         image2.setImageBitmap(creature2.Image);
+        attaqueLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int jet = new Random().nextInt(6) +1;
+                int domage = (creature1.Attaque + jet - creature2.Defense);
+                if(domage<=1){
+                    domage = 1; // pour faire au moins 1 de domage minimum en cas de trop grande defense de la part de l'adversaire
+                }
+                creature2.PV = creature2.PV - domage;
+                if(creature2.PV >0){
+                    refreshComposant();
+                    setTour();
+                }else{
+                    // 1. Instantiate an AlertDialog.Builder with its constructor
+                    AlertDialog.Builder builder = new AlertDialog.Builder(CombatLocal.this);
+
+                    // 2. Chain together various setter methods to set the dialog characteristics
+                    builder.setMessage("Victoire de la créature : " + creature1.Nom)
+                            .setTitle("Victoire");
+                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    });
+                    // 3. Get the AlertDialog from create()
+                    AlertDialog dialog = builder.create();
+                }
+
+            }
+        });
+        attaqueRigth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int jet = new Random().nextInt(6) +1;
+                int domage = (creature2.Attaque + jet - creature1.Defense);
+                if(domage<=1){
+                    domage = 1; // pour faire au moins 1 de domage minimum en cas de trop grande defense de la part de l'adversaire
+                }
+                creature1.PV = creature1.PV - domage;
+                if(creature1.PV >0){
+                    refreshComposant();
+                    setTour();
+                }else{
+                    // 1. Instantiate an AlertDialog.Builder with its constructor
+                    AlertDialog.Builder builder = new AlertDialog.Builder(CombatLocal.this);
+
+                    // 2. Chain together various setter methods to set the dialog characteristics
+                    builder.setMessage("Victoire de la créature : " + creature2.Nom)
+                            .setTitle("Victoire");
+                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    });
+                    // 3. Get the AlertDialog from create()
+                    AlertDialog dialog = builder.create();
+                }
+            }
+        });
+    }
+
+    private void setTour() {
+        tourCreature1 = !tourCreature1;
+        setMenu();
+    }
+
+    private void refreshComposant() {
+        pv1.setText("PV restant : "+creature1.PV);
+        pv2.setText("PV restant : "+creature2.PV);
     }
 
     private void setMenu(){
