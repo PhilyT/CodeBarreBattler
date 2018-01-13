@@ -80,6 +80,12 @@ public class ChoixReseau extends AppCompatActivity {
             }
 
         });
+        retour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         joueur.setAdapter(adapter2);
         title.setText("Combat Reseau - Choix");
     }
