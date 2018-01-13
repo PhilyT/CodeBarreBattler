@@ -30,6 +30,7 @@ public class Gestion extends AppCompatActivity {
         setContentView(R.layout.activity_gestion);
         initialise();
         mListView =(ListView)findViewById(R.id.listView) ;
+        points=  (TextView) findViewById(R.id.points);
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         String[] items = new String[] { "Creatures", "Equipements", "Potions"  };
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
@@ -48,16 +49,22 @@ public class Gestion extends AppCompatActivity {
                     DataCreature dataCreature = new DataCreature(Gestion.this,creatures);
 
                     mListView.setAdapter(dataCreature);
+                    mListView.setVisibility(View.VISIBLE);
+                    points.setVisibility(View.INVISIBLE);
 
                 }
                 else if(item.equalsIgnoreCase("Equipements")){
                     DataEquipement dataEquiment = new DataEquipement(Gestion.this,equipements);
 
                     mListView.setAdapter(dataEquiment);
+                    mListView.setVisibility(View.VISIBLE);
+                    points.setVisibility(View.INVISIBLE);
+
                 }
                 else if(item.equalsIgnoreCase("Potions")){
-                  points=  (TextView) findViewById(R.id.points);
+
                     points.setText(" Reserve de potion"+potion);
+                    points.setVisibility(View.VISIBLE);
                     mListView.setVisibility(View.INVISIBLE);
 
 
