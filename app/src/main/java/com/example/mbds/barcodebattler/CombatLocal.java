@@ -1,22 +1,26 @@
-package com.example.tom.barcodebattler;
+package com.example.mbds.barcodebattler;
 
 import android.graphics.BitmapFactory;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class CombatReseau extends AppCompatActivity {
+public class CombatLocal extends AppCompatActivity {
 
     TextView title;
     TextView pv1;
     TextView pv2;
     TextView nom1;
     TextView nom2;
-    TextView attaque;
-    TextView potion;
-    TextView fuir;
+    TextView attaqueLeft;
+    TextView attaqueRigth;
+    TextView potionLeft;
+    TextView potionRigth;
+    TextView fuirRigth;
+    TextView fuirLeft;
     ImageView image1;
     ImageView image2;
     boolean tourCreature1;
@@ -26,7 +30,7 @@ public class CombatReseau extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_combat_reseau);
+        setContentView(R.layout.activity_combat_local);
         // Initialize Composant
         title = (TextView)findViewById(R.id.title);
         pv1 = (TextView)findViewById(R.id.pv1);
@@ -35,9 +39,12 @@ public class CombatReseau extends AppCompatActivity {
         nom2 = (TextView)findViewById(R.id.nom2);
         image1 = (ImageView)findViewById(R.id.image1);
         image2 = (ImageView)findViewById(R.id.image2);
-        attaque = (TextView)findViewById(R.id.attaqueLeft);
-        potion = (TextView)findViewById(R.id.potionLeft);
-        fuir = (TextView)findViewById(R.id.fuirLeft);
+        attaqueLeft = (TextView)findViewById(R.id.attaqueLeft);
+        potionLeft = (TextView)findViewById(R.id.potionLeft);
+        fuirLeft = (TextView)findViewById(R.id.fuirLeft);
+        attaqueRigth = (TextView)findViewById(R.id.attaqueRigth);
+        potionRigth = (TextView)findViewById(R.id.potionRigth);
+        fuirRigth = (TextView)findViewById(R.id.fuirRigth);
 
         // Initialize Data
         tourCreature1 = true;
@@ -48,7 +55,7 @@ public class CombatReseau extends AppCompatActivity {
 
         // Custom Composant
         setMenu();
-        title.setText("Combat Reseau");
+        title.setText("Combat Local");
         pv1.setText("PV restant : "+creature1.PV);
         pv2.setText("PV restant : "+creature2.PV);
         nom1.setText(creature1.Nom);
@@ -59,9 +66,11 @@ public class CombatReseau extends AppCompatActivity {
 
     private void setMenu(){
         if(tourCreature1){
-            findViewById(R.id.menu).setVisibility(View.VISIBLE);
+            findViewById(R.id.menuRigth).setVisibility(View.INVISIBLE);
+            findViewById(R.id.menuLeft).setVisibility(View.VISIBLE);
         }else {
-            findViewById(R.id.menu).setVisibility(View.INVISIBLE);
+            findViewById(R.id.menuLeft).setVisibility(View.INVISIBLE);
+            findViewById(R.id.menuRigth).setVisibility(View.VISIBLE);
         }
     }
 }

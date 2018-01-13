@@ -9,3 +9,5 @@
 .externalNativeBuild
 app/src/main/res/mipmap-*
 /.idea
+/build.gradle
+/gradle/wrapper/
