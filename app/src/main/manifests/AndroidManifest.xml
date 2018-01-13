@@ -28,8 +28,6 @@
         <activity android:name=".CombatReseau">
 
         </activity>
-        <activity android:name=".Gestion"></activity>
-
     </application>
 
 </manifest>

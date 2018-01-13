@@ -40,7 +40,7 @@
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/button2"
+                    android:id="@+id/gestionId"
                     android:background="@drawable/right_buttom_btn_line"
                     android:text="Gestion"
                     android:textSize="18sp"
@@ -95,7 +95,7 @@
                 <ImageView
                     android:layout_width="150dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/reseau"
+                    android:src="@drawable/bouthoo"
                     android:layout_centerInParent="true"/>
             </RelativeLayout>
         </TableRow>
