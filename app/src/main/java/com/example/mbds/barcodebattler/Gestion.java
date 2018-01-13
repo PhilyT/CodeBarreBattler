@@ -1,4 +1,4 @@
-package com.example.tom.barcodebattler;
+package com.example.mbds.barcodebattler;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
