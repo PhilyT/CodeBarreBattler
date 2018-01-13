@@ -51,8 +51,9 @@ public class Gestion extends AppCompatActivity {
 
                 }
                 else if(item.equalsIgnoreCase("Equipements")){
-                    final ArrayAdapter<Equipement> equipementAdapter = new ArrayAdapter<Equipement>(Gestion.this, android.R.layout.simple_list_item_1, equipements);
-                    mListView.setAdapter(equipementAdapter);
+                    DataEquipement dataEquiment = new DataEquipement(Gestion.this,equipements);
+
+                    mListView.setAdapter(dataEquiment);
                 }
                 else if(item.equalsIgnoreCase("Potions")){
                   points=  (TextView) findViewById(R.id.points);
