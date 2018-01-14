@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        />
+
+    <TextView
+        android:id="@+id/nom"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:textColor="@android:color/black"
+        android:layout_toRightOf="@id/image"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:textStyle="bold"
+        />
+
+    <TextView android:id="@+id/pv"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:textColor="@android:color/black"
+        android:layout_below="@id/nom"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@id/image"/>
+    <TextView android:id="@+id/attaque"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:textColor="@android:color/black"
+        android:layout_below="@id/pv"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@id/image"/>
+    <TextView android:id="@+id/defense"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:textColor="@android:color/black"
+        android:layout_below="@id/attaque"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@id/image"/>
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        style="@style/spinner_style"
+        android:spinnerMode="dropdown"
+        android:layout_below="@id/defense"
+        android:layout_above="@+id/image"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"/>
+
+
+
+        <Button
+            android:id="@+id/suppression"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="Supprimer"
+            android:layout_below="@+id/spinner"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+           
+            android:layout_alignParentStart="true"
+
+            />
+
+    <Button
+        android:id="@+id/ajout"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:text="Ajouter"
+        android:layout_below="@+id/spinner"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/suppression"
+        android:layout_alignParentStart="true" />
+
+
+
+
+
+</RelativeLayout>

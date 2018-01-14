@@ -46,11 +46,27 @@ public class Gestion extends AppCompatActivity {
                 String item = (String) parent.getItemAtPosition(position);
 
                 if(item.equalsIgnoreCase("Creatures")){
-                    DataCreature dataCreature = new DataCreature(Gestion.this,creatures);
+                    final DataCreature dataCreature = new DataCreature(Gestion.this,creatures);
 
                     mListView.setAdapter(dataCreature);
                     mListView.setVisibility(View.VISIBLE);
                     points.setVisibility(View.INVISIBLE);
+                    mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                        {
+                            Creature creature =  dataCreature.creatures.get(position);
+                            Intent intent = new Intent(Gestion.this,DetailCreature.class);
+                            intent.putExtra("nom",creature.Nom.toString());
+                            intent.putExtra("pv","Points de vie"+creature.PV);
+                            intent.putExtra("attaque","Points Attaque"+creature.Attaque);
+                            intent.putExtra("defense","Points Defenses"+creature.Defense);
+                            intent.putExtra("image",creature.Image);
+                            startActivityForResult(intent,1);
+                        }
+                    });
+
+
 
                 }
                 else if(item.equalsIgnoreCase("Equipements")){
@@ -77,6 +93,7 @@ public class Gestion extends AppCompatActivity {
 
             }
         });
+
 
     }
     public void initialise(){

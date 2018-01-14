@@ -18,20 +18,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChoixLocal">
-
-        </activity>
-        <activity android:name=".ChoixReseau">
-
-        </activity>
-        <activity android:name=".CombatLocal">
-
-        </activity>
-        <activity android:name=".CombatReseau">
-
-        </activity>
-        <activity android:name=".Gestion"></activity>
-
+        <activity android:name=".ChoixLocal"></activity>
+        <activity android:name=".ChoixReseau"></activity>
+        <activity android:name=".CombatLocal"></activity>
+        <activity android:name=".CombatReseau"></activity>
+        <activity android:name=".Gestion" />
+        <activity android:name=".DetailCreature"></activity>
     </application>
 
 </manifest>
