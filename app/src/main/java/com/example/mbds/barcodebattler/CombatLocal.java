@@ -3,6 +3,8 @@ package com.example.mbds.barcodebattler;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -30,6 +32,7 @@ public class CombatLocal extends AppCompatActivity {
     boolean tourCreature1;
     Creature creature1;
     Creature creature2;
+    int potionCpt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,7 @@ public class CombatLocal extends AppCompatActivity {
                 R.mipmap.archer_squelette));
         creature2 = new Creature("tata", 30 , 8, 8, BitmapFactory.decodeResource(this.getResources(),
                 R.mipmap.archidiable));
+        potionCpt = 30;
 
         // Custom Composant
         setMenu();
@@ -68,62 +72,110 @@ public class CombatLocal extends AppCompatActivity {
         attaqueLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int jet = new Random().nextInt(6) +1;
-                int domage = (creature1.Attaque + jet - creature2.Defense);
-                if(domage<=1){
-                    domage = 1; // pour faire au moins 1 de domage minimum en cas de trop grande defense de la part de l'adversaire
-                }
-                creature2.PV = creature2.PV - domage;
-                if(creature2.PV >0){
-                    refreshComposant();
-                    setTour();
-                }else{
-                    // 1. Instantiate an AlertDialog.Builder with its constructor
-                    AlertDialog.Builder builder = new AlertDialog.Builder(CombatLocal.this);
-
-                    // 2. Chain together various setter methods to set the dialog characteristics
-                    builder.setMessage("Victoire de la créature : " + creature1.Nom)
-                            .setTitle("Victoire");
-                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            finish();
-                        }
-                    });
-                    // 3. Get the AlertDialog from create()
-                    AlertDialog dialog = builder.create();
-                }
-
+                attaquer(creature1, creature2);
             }
         });
         attaqueRigth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int jet = new Random().nextInt(6) +1;
-                int domage = (creature2.Attaque + jet - creature1.Defense);
-                if(domage<=1){
-                    domage = 1; // pour faire au moins 1 de domage minimum en cas de trop grande defense de la part de l'adversaire
-                }
-                creature1.PV = creature1.PV - domage;
-                if(creature1.PV >0){
-                    refreshComposant();
-                    setTour();
-                }else{
-                    // 1. Instantiate an AlertDialog.Builder with its constructor
-                    AlertDialog.Builder builder = new AlertDialog.Builder(CombatLocal.this);
-
-                    // 2. Chain together various setter methods to set the dialog characteristics
-                    builder.setMessage("Victoire de la créature : " + creature2.Nom)
-                            .setTitle("Victoire");
-                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            finish();
-                        }
-                    });
-                    // 3. Get the AlertDialog from create()
-                    AlertDialog dialog = builder.create();
-                }
+                attaquer(creature2, creature1);
             }
         });
+        fuirLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupFuir();
+            }
+        });
+        fuirRigth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupFuir();
+            }
+        });
+        potionLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                utiliserPotion(creature1);
+            }
+        });
+        potionRigth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                utiliserPotion(creature2);
+            }
+        });
+    }
+
+    public void attaquer(Creature attaque, Creature defense){
+        int jet = new Random().nextInt(6) +1;
+        int domage = (attaque.Attaque + jet - defense.Defense);
+        if(domage<=1){
+            domage = 1; // pour faire au moins 1 de domage minimum en cas de trop grande defense de la part de l'adversaire
+        }
+        defense.PV = defense.PV - domage;
+        if(defense.PV >0){
+            refreshComposant();
+            setTour();
+        }else{
+            refreshComposant();
+            popupVictoire(attaque.Nom);
+        }
+    }
+
+    public void utiliserPotion(Creature creature){
+        if(potionCpt>=10){
+            creature.PV = creature.PV + 10;
+            potionCpt = potionCpt -10;
+            if(potionCpt==0){
+                potionLeft.setTextColor(Color.LTGRAY);
+                potionRigth.setTextColor(Color.LTGRAY);
+            }
+            refreshComposant();
+            setTour();
+        }
+        else if (potionCpt >0){
+            creature.PV = creature.PV + potionCpt;
+            potionCpt =0;
+            potionLeft.setTextColor(Color.LTGRAY);
+            potionRigth.setTextColor(Color.LTGRAY);
+            refreshComposant();
+            setTour();
+        }
+    }
+
+    private void popupFuir(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(CombatLocal.this);
+
+        builder.setMessage("Voulez vous abandonner le combat ? ")
+                .setTitle("Fuir");
+        builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                finish();
+            }
+        });
+        builder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void popupVictoire(String nomCreature){
+        AlertDialog.Builder builder = new AlertDialog.Builder(CombatLocal.this);
+
+        builder.setMessage("Victoire de la créature : " + nomCreature)
+                .setTitle("Victoire");
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                finish();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     private void setTour() {

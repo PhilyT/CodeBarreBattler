@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView01" android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+<LinearLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -27,7 +30,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="visualisation de la créature" />
+            android:text="visualisation de la créature"
+            android:textColor="@android:color/black"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -52,28 +56,32 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"/>
 
                 <TextView
                     android:id="@+id/pv1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="PV : " />
+                    android:text="PV : "
+                    android:textColor="@android:color/black"/>
 
                 <TextView
                     android:id="@+id/attaque1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="Attaque : " />
+                    android:text="Attaque : "
+                    android:textColor="@android:color/black"/>
 
                 <TextView
                     android:id="@+id/defense1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="Defense : " />
+                    android:text="Defense : "
+                    android:textColor="@android:color/black"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -104,7 +112,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="visualisation de la créature" />
+            android:text="visualisation de la créature"
+            android:textColor="@android:color/black"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -129,28 +138,32 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"/>
 
                 <TextView
                     android:id="@+id/pv2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="PV : " />
+                    android:text="PV : "
+                    android:textColor="@android:color/black"/>
 
                 <TextView
                     android:id="@+id/attaque2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="Attaque : " />
+                    android:text="Attaque : "
+                    android:textColor="@android:color/black"/>
 
                 <TextView
                     android:id="@+id/defense2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="Defense : " />
+                    android:text="Defense : "
+                    android:textColor="@android:color/black"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -193,3 +206,4 @@
     </LinearLayout>
 
 </LinearLayout>
+</ScrollView>

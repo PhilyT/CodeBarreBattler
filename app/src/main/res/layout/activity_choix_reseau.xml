@@ -34,7 +34,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="visualisation de la créature" />
+            android:text="visualisation de la créature"
+            android:textColor="@android:color/black"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -59,28 +60,32 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"/>
 
                 <TextView
                     android:id="@+id/pv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="PV : " />
+                    android:text="PV : "
+                    android:textColor="@android:color/black"/>
 
                 <TextView
                     android:id="@+id/attaque"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="Attaque : " />
+                    android:text="Attaque : "
+                    android:textColor="@android:color/black"/>
 
                 <TextView
                     android:id="@+id/defense"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="Defense : " />
+                    android:text="Defense : "
+                    android:textColor="@android:color/black"/>
             </LinearLayout>
         </LinearLayout>
 

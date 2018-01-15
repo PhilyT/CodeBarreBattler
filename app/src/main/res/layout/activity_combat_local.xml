@@ -23,7 +23,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"/>
+                android:layout_marginRight="15dp"
+                android:textColor="@android:color/black"/>
             <ImageView
                 android:id="@+id/image1"
                 android:layout_marginTop="5dp"
@@ -38,7 +39,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:text="PV restant :"/>
+                android:text="PV restant :"
+                android:textColor="@android:color/black"/>
             <LinearLayout
                 android:id="@+id/menuLeft"
                 android:layout_marginTop="25dp"
@@ -53,21 +55,24 @@
                     android:text="Attaque"
                     android:textSize="25sp"
                     android:id="@+id/attaqueLeft"
-                    android:drawableLeft="@android:drawable/btn_star"/>
+                    android:drawableLeft="@android:drawable/btn_star"
+                    android:textColor="@android:color/black"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Potion"
                     android:id="@+id/potionLeft"
                     android:textSize="25sp"
-                    android:drawableLeft="@android:drawable/ic_input_add"/>
+                    android:drawableLeft="@android:drawable/ic_menu_add"
+                    android:textColor="@android:color/black"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Fuir"
                     android:id="@+id/fuirLeft"
                     android:textSize="25sp"
-                    android:drawableLeft="@android:drawable/ic_notification_clear_all"/>
+                    android:drawableLeft="@android:drawable/ic_notification_clear_all"
+                    android:textColor="@android:color/black"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -81,7 +86,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"/>
+                android:layout_marginRight="15dp"
+                android:textColor="@android:color/black"/>
             <ImageView
                 android:id="@+id/image2"
                 android:layout_marginTop="5dp"
@@ -96,7 +102,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:text="PV restant :"/>
+                android:text="PV restant :"
+                android:textColor="@android:color/black"/>
             <LinearLayout
                 android:id="@+id/menuRigth"
                 android:layout_marginTop="25dp"
@@ -111,21 +118,24 @@
                     android:text="Attaque"
                     android:id="@+id/attaqueRigth"
                     android:textSize="25sp"
-                    android:drawableLeft="@android:drawable/btn_star"/>
+                    android:drawableLeft="@android:drawable/btn_star"
+                    android:textColor="@android:color/black"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Potion"
                     android:id="@+id/potionRigth"
                     android:textSize="25sp"
-                    android:drawableLeft="@android:drawable/ic_input_add"/>
+                    android:drawableLeft="@android:drawable/ic_menu_add"
+                    android:textColor="@android:color/black"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Fuir"
                     android:id="@+id/fuirRigth"
                     android:textSize="25sp"
-                    android:drawableLeft="@android:drawable/ic_notification_clear_all"/>
+                    android:drawableLeft="@android:drawable/ic_notification_clear_all"
+                    android:textColor="@android:color/black"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
