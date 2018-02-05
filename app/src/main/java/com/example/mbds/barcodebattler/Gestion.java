@@ -63,11 +63,7 @@ public class Gestion extends AppCompatActivity {
                         {
                             Creature creature =  dataCreature.creatures.get(position);
                             Intent intent = new Intent(Gestion.this,DetailCreature.class);
-                            intent.putExtra("nom",creature.Nom.toString());
-                            intent.putExtra("pv","Points de vie"+creature.PV);
-                            intent.putExtra("attaque","Points Attaque"+creature.Attaque);
-                            intent.putExtra("defense","Points Defenses"+creature.Defense);
-                            intent.putExtra("image",creature.Image);
+                            intent.putExtra("creature",creature);
                             startActivityForResult(intent,1);
                         }
                     });
