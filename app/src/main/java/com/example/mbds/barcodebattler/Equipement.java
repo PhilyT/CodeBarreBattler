@@ -12,17 +12,26 @@ public class Equipement implements Parcelable {
     public int Id;
     public String Nom;
     public Bitmap Image;
-    public Equipement(String nom, Bitmap image){
+    public int Point;
+    public Attribut Attribut;
+
+    public Equipement(String nom, Bitmap image, int point, String attribut){
         Nom = nom;
         Image = image;
+        Point = point;
+        Attribut = Attribut.valueOf(attribut);
     }
+
     public Equipement(){
 
     }
 
     protected Equipement(Parcel in) {
         Id = in.readInt();
-        Nom = in.readString();
+        String[] valeurs = new String[2];
+        in.readStringArray(valeurs);
+        Nom = valeurs[0];
+        Attribut = Attribut.valueOf(valeurs[1]);
         Image = in.readParcelable(Bitmap.class.getClassLoader());
     }
 
@@ -45,8 +54,9 @@ public class Equipement implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        String[] valeurs = new String[]{Nom, Attribut.getKey()};
         parcel.writeInt(Id);
-        parcel.writeString(Nom);
+        parcel.writeStringArray(valeurs);
         parcel.writeParcelable(Image, i);
     }
 }

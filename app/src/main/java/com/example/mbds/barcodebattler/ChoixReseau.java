@@ -45,13 +45,22 @@ public class ChoixReseau extends AppCompatActivity {
         image = (ImageView) findViewById(R.id.image);
 
         // Init data
+        Equipement[] equipements1 = new Equipement[]{
+
+        };
+        Equipement[] equipements2 = new Equipement[]{
+
+        };
+        Equipement[] equipements3 = new Equipement[]{
+
+        };
         Creature[] items = new Creature[]{// Data for test
                 new Creature("toto", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(),
-                        R.mipmap.archer_squelette)),
+                        R.mipmap.archer_squelette),equipements1),
                 new Creature("titi", 30, 8, 8, BitmapFactory.decodeResource(this.getResources(),
-                        R.mipmap.archidiable)),
+                        R.mipmap.archidiable),equipements2),
                 new Creature("tata", 10, 20, 15, BitmapFactory.decodeResource(this.getResources(),
-                        R.mipmap.archidiablotin))
+                        R.mipmap.archidiablotin), equipements3)
         };
         String[] joueurs= new String[]{
                 "marco",
@@ -60,6 +69,8 @@ public class ChoixReseau extends AppCompatActivity {
         };
         ArrayAdapter<Creature> adapter = new ArrayAdapter<Creature>(this, android.R.layout.simple_spinner_item, items);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, joueurs);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        adapter2.setDropDownViewResource(R.layout.spinner_dropdown_item);
 
         // Set Widget
         choix.setAdapter(adapter);
