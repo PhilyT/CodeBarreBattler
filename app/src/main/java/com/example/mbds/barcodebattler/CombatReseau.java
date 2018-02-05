@@ -1,5 +1,6 @@
 package com.example.mbds.barcodebattler;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -40,11 +41,10 @@ public class CombatReseau extends AppCompatActivity {
         fuir = (TextView)findViewById(R.id.fuirLeft);
 
         // Initialize Data
+        Intent intent = getIntent();
         tourCreature1 = true;
-        creature1 = new Creature("toto", 30 , 4, 12, BitmapFactory.decodeResource(this.getResources(),
-                R.mipmap.archer_squelette));
-        creature2 = new Creature("tata", 30 , 8, 8, BitmapFactory.decodeResource(this.getResources(),
-                R.mipmap.archidiable));
+        creature1 = (Creature)intent.getParcelableExtra("Creature1");
+        creature2 = (Creature)intent.getParcelableExtra("Creature2");
 
         // Custom Composant
         setMenu();

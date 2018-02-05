@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Arrays;
+
 /**
  * Created by Tom on 10/01/2018.
  */
@@ -15,17 +17,19 @@ public class Creature implements Parcelable {
     public int Attaque;
     public int Defense;
     public Bitmap Image;
+    public Equipement[] Equipements;
 
     public Creature(){
 
     }
 
-    public Creature(String nom, int pv, int defense, int attaque, Bitmap image){
+    public Creature(String nom, int pv, int defense, int attaque, Bitmap image, Equipement[]equipements){
         Nom = nom;
         PV = pv;
         Attaque = attaque;
         Defense = defense;
         Image = image;
+        Equipements = equipements;
     }
     public Creature(String nom, int pv, int defense, int attaque){
         Nom = nom;
@@ -43,6 +47,8 @@ public class Creature implements Parcelable {
         Attaque = data[1];
         Defense = data[2];
         Image = in.readParcelable(Bitmap.class.getClassLoader());
+        Parcelable[] dataEquipements = in.readParcelableArray(Equipement.class.getClassLoader());
+        Equipements = Arrays.copyOf(dataEquipements, dataEquipements.length, Equipement[].class);
         Id = in.readInt();
     }
 
@@ -68,6 +74,7 @@ public class Creature implements Parcelable {
         dest.writeString(Nom);
         dest.writeIntArray(new int[] {PV, Attaque, Defense});
         dest.writeParcelable(this.Image,0);
+        dest.writeParcelableArray(Equipements, 1);
         dest.writeInt(Id);
     }
 

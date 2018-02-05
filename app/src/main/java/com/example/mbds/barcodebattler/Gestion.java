@@ -14,12 +14,18 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class Gestion extends AppCompatActivity {
     ListView mListView;
     ArrayList<Creature> creatures = new ArrayList<Creature>();
+    ArrayList<Equipement> equipements1 = new ArrayList<Equipement>();
+    ArrayList<Equipement> equipements2 = new ArrayList<Equipement>();
+    ArrayList<Equipement> equipements3 = new ArrayList<Equipement>();
+    ArrayList<Equipement> equipements4 = new ArrayList<Equipement>();
     ArrayList<Equipement> equipements = new ArrayList<Equipement>();
     int potion=30;
     TextView points;
@@ -57,11 +63,7 @@ public class Gestion extends AppCompatActivity {
                         {
                             Creature creature =  dataCreature.creatures.get(position);
                             Intent intent = new Intent(Gestion.this,DetailCreature.class);
-                            intent.putExtra("nom",creature.Nom.toString());
-                            intent.putExtra("pv","Points de vie"+creature.PV);
-                            intent.putExtra("attaque","Points Attaque"+creature.Attaque);
-                            intent.putExtra("defense","Points Defenses"+creature.Defense);
-                            intent.putExtra("image",creature.Image);
+                            intent.putExtra("creature",creature);
                             startActivityForResult(intent,1);
                         }
                     });
@@ -97,16 +99,27 @@ public class Gestion extends AppCompatActivity {
 
     }
     public void initialise(){
-        creatures.add(new Creature("archer", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.archer_squelette)));
-        creatures.add(new Creature("chevalier", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.chevalier)));
-        creatures.add(new Creature("best", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.best)));
-        creatures.add(new Creature("diable", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.diable)));
+        equipements.add(new Equipement("baton", BitmapFactory.decodeResource(this.getResources(), R.mipmap.archer_squelette), 2, "Attaque"));
+        equipements.add(new Equipement("epee", BitmapFactory.decodeResource(this.getResources(), R.mipmap.feticheur), 6, "Attaque"));
+        equipements.add(new Equipement("bouclier", BitmapFactory.decodeResource(this.getResources(), R.mipmap.chevalier), 6, "Defense"));
+        equipements.add(new Equipement("casque", BitmapFactory.decodeResource(this.getResources(), R.mipmap.best), 10, "Vie"));
+
+        equipements1.add(new Equipement("baton", BitmapFactory.decodeResource(this.getResources(), R.mipmap.archer_squelette), 2, "Attaque"));
+        equipements1.add(new Equipement("epee", BitmapFactory.decodeResource(this.getResources(), R.mipmap.feticheur), 6, "Attaque"));
+        equipements1.add(new Equipement("bouclier", BitmapFactory.decodeResource(this.getResources(), R.mipmap.chevalier), 6, "Defense"));
+        equipements1.add(new Equipement("casque", BitmapFactory.decodeResource(this.getResources(), R.mipmap.best), 10, "Vie"));
+
+        equipements2.add(new Equipement("baton", BitmapFactory.decodeResource(this.getResources(), R.mipmap.archer_squelette), 2, "Attaque"));
+        equipements2.add(new Equipement("epee", BitmapFactory.decodeResource(this.getResources(), R.mipmap.feticheur), 6, "Attaque"));
+        equipements2.add(new Equipement("bouclier", BitmapFactory.decodeResource(this.getResources(), R.mipmap.chevalier), 6, "Defense"));
+
+        equipements3.add(new Equipement("baton", BitmapFactory.decodeResource(this.getResources(), R.mipmap.archer_squelette), 2, "Attaque"));
 
 
-        equipements.add(new Equipement("archer", BitmapFactory.decodeResource(this.getResources(), R.mipmap.archer_squelette)));
-        equipements.add(new Equipement("feticheur", BitmapFactory.decodeResource(this.getResources(), R.mipmap.feticheur)));
-        equipements.add(new Equipement("chevalier", BitmapFactory.decodeResource(this.getResources(), R.mipmap.chevalier)));
-        equipements.add(new Equipement("best", BitmapFactory.decodeResource(this.getResources(), R.mipmap.best)));
+        creatures.add(new Creature("archer", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.archer_squelette), Arrays.copyOf(equipements1.toArray(), 4, Equipement[].class)));
+        creatures.add(new Creature("chevalier", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.chevalier), Arrays.copyOf(equipements2.toArray(), 3, Equipement[].class)));
+        creatures.add(new Creature("best", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.best), Arrays.copyOf(equipements3.toArray(), 1, Equipement[].class)));
+        creatures.add(new Creature("diable", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.diable), Arrays.copyOf(equipements4.toArray(), 0, Equipement[].class)));
 
     }
 

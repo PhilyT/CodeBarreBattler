@@ -37,6 +37,9 @@ public class ChoixLocal extends AppCompatActivity {
     Button lancer;
     ImageView image1;
     ImageView image2;
+    Creature creatureSelected1;
+    Creature creatureSelected2;
+    Creature[] items;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,27 +66,39 @@ public class ChoixLocal extends AppCompatActivity {
         image2 = (ImageView) findViewById(R.id.image2);
 
         // Init data
-        Creature[] items = new Creature[]{// Data for test
-                new Creature("toto", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(),
-                        R.mipmap.archer_squelette)),
-                new Creature("titi", 30, 8, 8, BitmapFactory.decodeResource(this.getResources(),
-                        R.mipmap.archidiable)),
-                new Creature("tata", 10, 20, 15, BitmapFactory.decodeResource(this.getResources(),
-                        R.mipmap.archidiablotin))
+        Equipement[] equipements1 = new Equipement[]{
+
         };
+        Equipement[] equipements2 = new Equipement[]{
+
+        };
+        Equipement[] equipements3 = new Equipement[]{
+
+        };
+        items = new Creature[]{// Data for test
+                new Creature("toto", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(),
+                        R.mipmap.archer_squelette), equipements1),
+                new Creature("titi", 30, 8, 8, BitmapFactory.decodeResource(this.getResources(),
+                        R.mipmap.archidiable), equipements2),
+                new Creature("tata", 10, 20, 15, BitmapFactory.decodeResource(this.getResources(),
+                        R.mipmap.archidiablotin), equipements3)
+        };
+        creatureSelected1 = items[1];
+        creatureSelected2 = items[1];
         ArrayAdapter<Creature> adapter = new ArrayAdapter<Creature>(this, android.R.layout.simple_spinner_item, items);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
 
         // Set Widget
         choix1.setAdapter(adapter);
         choix1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                Creature creatureSelected = (Creature)parentView.getItemAtPosition(position);
-                nom1.setText(creatureSelected.Nom);
-                pv1.setText("PV : "+creatureSelected.PV);
-                attaque1.setText("Attaque : "+creatureSelected.Attaque);
-                defense1.setText("Defense : "+creatureSelected.Defense);
-                image1.setImageBitmap(creatureSelected.Image);
+                creatureSelected1 = (Creature)parentView.getItemAtPosition(position);
+                nom1.setText(creatureSelected1.Nom);
+                pv1.setText("PV : "+creatureSelected1.PV);
+                attaque1.setText("Attaque : "+creatureSelected1.Attaque);
+                defense1.setText("Defense : "+creatureSelected1.Defense);
+                image1.setImageBitmap(creatureSelected1.Image);
             }
 
             @Override
@@ -96,12 +111,12 @@ public class ChoixLocal extends AppCompatActivity {
         choix2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                Creature creatureSelected = (Creature)parentView.getItemAtPosition(position);
-                nom2.setText(creatureSelected.Nom);
-                pv2.setText("PV : "+creatureSelected.PV);
-                attaque2.setText("Attaque : "+creatureSelected.Attaque);
-                defense2.setText("Defense : "+creatureSelected.Defense);
-                image2.setImageBitmap(creatureSelected.Image);
+                creatureSelected2 = (Creature)parentView.getItemAtPosition(position);
+                nom2.setText(creatureSelected2.Nom);
+                pv2.setText("PV : "+creatureSelected2.PV);
+                attaque2.setText("Attaque : "+creatureSelected2.Attaque);
+                defense2.setText("Defense : "+creatureSelected2.Defense);
+                image2.setImageBitmap(creatureSelected2.Image);
             }
 
             @Override
@@ -120,6 +135,8 @@ public class ChoixLocal extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ChoixLocal.this,CombatLocal.class);
+                intent.putExtra("Creature1", creatureSelected1);
+                intent.putExtra("Creature2", creatureSelected2);
                 startActivityForResult(intent,1);
             }
         });
