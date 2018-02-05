@@ -1,15 +1,15 @@
 package com.example.mbds.barcodebattler;
-
 import android.content.Context;
 import android.database.DataSetObserver;
+
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-
 /**
  * Created by deptinfo on 13/01/2018.
  */
@@ -66,11 +66,13 @@ public class DataEquipement implements ListAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         TextView txtNom ;
         ImageView image ;
+        TextView fab;
         View returnView ;
         if(view==null){
             returnView= View.inflate(this.context,R.layout.layoutequipement,null);
             txtNom=(TextView) returnView.findViewById(R.id.nom);
             txtNom.setText(equipements.get(i).Nom);
+            fab=(TextView) returnView.findViewById(R.id.delete);
 
             if(equipements.get(i).Image != null)
             {

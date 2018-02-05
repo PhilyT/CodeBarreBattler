@@ -1,89 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.mbds.barcodebattler.DetailCreature">
+
+    <include layout="@layout/header" />
 
 
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="20dp"
-        />
 
-    <TextView
-        android:id="@+id/nom"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:textColor="@android:color/black"
-        android:layout_toRightOf="@id/image"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:textStyle="bold"
-        />
 
-    <TextView android:id="@+id/pv"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:textColor="@android:color/black"
-        android:layout_below="@id/nom"
-        android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@id/image"/>
-    <TextView android:id="@+id/attaque"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:textColor="@android:color/black"
-        android:layout_below="@id/pv"
-        android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@id/image"/>
-    <TextView android:id="@+id/defense"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:textColor="@android:color/black"
-        android:layout_below="@id/attaque"
-        android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@id/image"/>
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        style="@style/spinner_style"
-        android:spinnerMode="dropdown"
-        android:layout_below="@id/defense"
-        android:layout_above="@+id/image"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"/>
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Détail de la créature"
+            android:textColor="@android:color/black"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="5">
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"/>
 
 
 
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/nom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView android:id="@+id/pv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@android:color/black"
+                   />
+                <TextView android:id="@+id/attaque"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@android:color/black"
+                   />
+                <TextView android:id="@+id/defense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@android:color/black"
+                   />
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/equipements"
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+
+        </ListView>
+
+        <Spinner
+            android:id="@+id/spinner"
+            style="@style/spinner_style"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="5dp"
+            android:spinnerMode="dropdown" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:id="@+id/retour"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="&lt; Retour" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
         <Button
             android:id="@+id/suppression"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Supprimer"
-            android:layout_below="@+id/spinner"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-           
-            android:layout_alignParentStart="true"
-
             />
 
-    <Button
-        android:id="@+id/ajout"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:text="Ajouter"
-        android:layout_below="@+id/spinner"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@+id/suppression"
-        android:layout_alignParentStart="true" />
 
 
 
+    </LinearLayout>
 
-
-</RelativeLayout>
+</LinearLayout>

@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
@@ -23,10 +24,14 @@ import static com.example.mbds.barcodebattler.R.id.spinner;
 public class DetailCreature extends AppCompatActivity {
     TextView txtNom ,txtPv, txtAttaque, txtDefense;
     ImageView image ;
+    ListView mListView;
+
+    ArrayList<Equipement> equipements = new ArrayList<Equipement>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_creature);
+        initialise();
 
         txtNom=(TextView)findViewById(R.id.nom);
         txtPv=(TextView)findViewById(R.id.pv);
@@ -41,6 +46,11 @@ public class DetailCreature extends AppCompatActivity {
         txtPv.setText(intent.getStringExtra("pv"));
         txtDefense.setText(intent.getStringExtra("defense"));
         image.setImageBitmap((Bitmap) intent.getParcelableExtra("image"));
+
+        mListView =(ListView)findViewById(R.id.equipements);
+        DataEquipement dataEquiment = new DataEquipement(DetailCreature.this,equipements);
+
+        mListView.setAdapter(dataEquiment);
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         String[] items = new String[] { "Equipement1", "Equipement2", "Equipements3"  };
@@ -62,5 +72,14 @@ public class DetailCreature extends AppCompatActivity {
 
             }
         });
+    }
+    public void initialise(){
+
+
+        equipements.add(new Equipement("equipement1", BitmapFactory.decodeResource(this.getResources(), R.mipmap.archer_squelette)));
+        equipements.add(new Equipement("equipement2", BitmapFactory.decodeResource(this.getResources(), R.mipmap.feticheur)));
+        equipements.add(new Equipement("equipement3", BitmapFactory.decodeResource(this.getResources(), R.mipmap.chevalier)));
+        equipements.add(new Equipement("equipement4", BitmapFactory.decodeResource(this.getResources(), R.mipmap.best)));
+
     }
 }
