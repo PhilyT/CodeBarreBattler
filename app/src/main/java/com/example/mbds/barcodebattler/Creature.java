@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Arrays;
+
 /**
  * Created by Tom on 10/01/2018.
  */
@@ -38,7 +40,8 @@ public class Creature implements Parcelable {
         Attaque = data[1];
         Defense = data[2];
         Image = in.readParcelable(Bitmap.class.getClassLoader());
-        Equipements = (Equipement[])in.readParcelableArray(Equipement.class.getClassLoader());
+        Parcelable[] dataEquipements = in.readParcelableArray(Equipement.class.getClassLoader());
+        Equipements = Arrays.copyOf(dataEquipements, dataEquipements.length, Equipement[].class);
         Id = in.readInt();
     }
 

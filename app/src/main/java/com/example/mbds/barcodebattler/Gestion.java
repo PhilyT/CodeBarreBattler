@@ -14,7 +14,9 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class Gestion extends AppCompatActivity {
@@ -118,10 +120,10 @@ public class Gestion extends AppCompatActivity {
         equipements3.add(new Equipement("baton", BitmapFactory.decodeResource(this.getResources(), R.mipmap.archer_squelette), 2, "Attaque"));
 
 
-        creatures.add(new Creature("archer", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.archer_squelette), (Equipement[])equipements1.toArray()));
-        creatures.add(new Creature("chevalier", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.chevalier), (Equipement[])equipements2.toArray()));
-        creatures.add(new Creature("best", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.best), (Equipement[])equipements3.toArray()));
-        creatures.add(new Creature("diable", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.diable), (Equipement[])equipements4.toArray()));
+        creatures.add(new Creature("archer", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.archer_squelette), Arrays.copyOf(equipements1.toArray(), 4, Equipement[].class)));
+        creatures.add(new Creature("chevalier", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.chevalier), Arrays.copyOf(equipements2.toArray(), 3, Equipement[].class)));
+        creatures.add(new Creature("best", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.best), Arrays.copyOf(equipements3.toArray(), 1, Equipement[].class)));
+        creatures.add(new Creature("diable", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.diable), Arrays.copyOf(equipements4.toArray(), 0, Equipement[].class)));
 
     }
 
