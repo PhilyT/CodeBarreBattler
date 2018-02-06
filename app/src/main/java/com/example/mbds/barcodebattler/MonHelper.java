@@ -65,6 +65,8 @@ public class MonHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREAT_DB);
+        db.execSQL(Table);
+
     }
 
     @Override
@@ -93,7 +95,23 @@ public class MonHelper extends SQLiteOpenHelper {
         return db.insert(TABLE_NAME, null, contentValues) != -1;
 
     }
-    public ArrayList<Creature> getAllPersonnes() {
+    public Boolean  addEquipement(String name , String attribut , Integer point , Bitmap image){
+        ContentValues content = new ContentValues();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_NAME, name);
+        contentValues.put(COLUMN_attribut,attribut);
+        contentValues.put(COLUMN_Point,point);
+
+        ByteArrayOutputStream boas = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.JPEG, 100, boas ); //bm is the bitmap object
+        byte[] byteArrayImage = boas .toByteArray();
+
+        contentValues.put(COLUMN_IMAGE, byteArrayImage );
+        SQLiteDatabase db = getWritableDatabase();
+        return db.insert(TABLE_NAME, null, contentValues) != -1;
+
+    }
+    public ArrayList<Creature> getAllCreatures() {
         ArrayList<Creature> creatures = new ArrayList<Creature>();
         SQLiteDatabase db =this.getReadableDatabase();
 
@@ -112,6 +130,28 @@ public class MonHelper extends SQLiteOpenHelper {
         creat.close();
         db.close();
         return  creatures;
+
+
+    }
+    public ArrayList<Equipement> getAllEquipements() {
+        ArrayList<Equipement> equipements = new ArrayList<Equipement>();
+        SQLiteDatabase db =this.getReadableDatabase();
+
+        Cursor equip = db.rawQuery(" SELECT * FROM " + TABLE_NOM, null);
+
+        if (equip.moveToFirst())
+        {
+            do {
+                Equipement q = new Equipement (equip.getString(1),equip.getInt(2),equip.getString(3));
+                byte[] image = equip.getBlob(3);
+                q.setImage(BitmapFactory.decodeByteArray(image,0, image.length));
+                equipements.add(q);
+
+            }while (equip.moveToNext());
+        }
+        equip.close();
+        db.close();
+        return  equipements;
 
 
     }
