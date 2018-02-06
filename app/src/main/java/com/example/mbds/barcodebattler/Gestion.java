@@ -99,26 +99,26 @@ public class Gestion extends AppCompatActivity {
 
     }
     public void initialise(){
-        equipements.add(new Equipement("baton", BitmapFactory.decodeResource(this.getResources(), R.mipmap.archer_squelette), 2, "Attaque"));
-        equipements.add(new Equipement("epee", BitmapFactory.decodeResource(this.getResources(), R.mipmap.feticheur), 6, "Attaque"));
-        equipements.add(new Equipement("bouclier", BitmapFactory.decodeResource(this.getResources(), R.mipmap.chevalier), 6, "Defense"));
-        equipements.add(new Equipement("casque", BitmapFactory.decodeResource(this.getResources(), R.mipmap.best), 10, "Vie"));
+        equipements.add(new Equipement("baton", BitmapFactory.decodeResource(this.getResources(), R.mipmap.baton), 2, "Attaque"));
+        equipements.add(new Equipement("epee", BitmapFactory.decodeResource(this.getResources(), R.mipmap.epee), 6, "Attaque"));
+        equipements.add(new Equipement("bouclier", BitmapFactory.decodeResource(this.getResources(), R.mipmap.bouclier), 6, "Defense"));
+        equipements.add(new Equipement("casque", BitmapFactory.decodeResource(this.getResources(), R.mipmap.casque), 10, "Vie"));
 
-        equipements1.add(new Equipement("baton", BitmapFactory.decodeResource(this.getResources(), R.mipmap.archer_squelette), 2, "Attaque"));
-        equipements1.add(new Equipement("epee", BitmapFactory.decodeResource(this.getResources(), R.mipmap.feticheur), 6, "Attaque"));
-        equipements1.add(new Equipement("bouclier", BitmapFactory.decodeResource(this.getResources(), R.mipmap.chevalier), 6, "Defense"));
-        equipements1.add(new Equipement("casque", BitmapFactory.decodeResource(this.getResources(), R.mipmap.best), 10, "Vie"));
+        equipements1.add(new Equipement("baton", BitmapFactory.decodeResource(this.getResources(), R.mipmap.baton), 2, "Attaque"));
+        equipements1.add(new Equipement("epee", BitmapFactory.decodeResource(this.getResources(), R.mipmap.epee), 6, "Attaque"));
+        equipements1.add(new Equipement("bouclier", BitmapFactory.decodeResource(this.getResources(), R.mipmap.bouclier), 6, "Defense"));
+        equipements1.add(new Equipement("casque", BitmapFactory.decodeResource(this.getResources(), R.mipmap.casque), 10, "Vie"));
 
-        equipements2.add(new Equipement("baton", BitmapFactory.decodeResource(this.getResources(), R.mipmap.archer_squelette), 2, "Attaque"));
-        equipements2.add(new Equipement("epee", BitmapFactory.decodeResource(this.getResources(), R.mipmap.feticheur), 6, "Attaque"));
-        equipements2.add(new Equipement("bouclier", BitmapFactory.decodeResource(this.getResources(), R.mipmap.chevalier), 6, "Defense"));
+        equipements2.add(new Equipement("baton", BitmapFactory.decodeResource(this.getResources(), R.mipmap.baton), 2, "Attaque"));
+        equipements2.add(new Equipement("epee", BitmapFactory.decodeResource(this.getResources(), R.mipmap.epee), 6, "Attaque"));
+        equipements2.add(new Equipement("bouclier", BitmapFactory.decodeResource(this.getResources(), R.mipmap.bouclier), 6, "Defense"));
 
-        equipements3.add(new Equipement("baton", BitmapFactory.decodeResource(this.getResources(), R.mipmap.archer_squelette), 2, "Attaque"));
+        equipements3.add(new Equipement("baton", BitmapFactory.decodeResource(this.getResources(), R.mipmap.baton), 2, "Attaque"));
 
 
         creatures.add(new Creature("archer", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.archer_squelette), Arrays.copyOf(equipements1.toArray(), 4, Equipement[].class)));
         creatures.add(new Creature("chevalier", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.chevalier), Arrays.copyOf(equipements2.toArray(), 3, Equipement[].class)));
-        creatures.add(new Creature("best", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.best), Arrays.copyOf(equipements3.toArray(), 1, Equipement[].class)));
+        creatures.add(new Creature("beast", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.beast), Arrays.copyOf(equipements3.toArray(), 1, Equipement[].class)));
         creatures.add(new Creature("diable", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.diable), Arrays.copyOf(equipements4.toArray(), 0, Equipement[].class)));
 
     }
