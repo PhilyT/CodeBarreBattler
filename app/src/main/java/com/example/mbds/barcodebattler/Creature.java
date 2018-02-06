@@ -31,6 +31,13 @@ public class Creature implements Parcelable {
         Image = image;
         Equipements = equipements;
     }
+    public Creature(String nom, int pv, int defense, int attaque){
+        Nom = nom;
+        PV = pv;
+        Attaque = attaque;
+        Defense = defense;
+
+    }
 
     protected Creature(Parcel in) {
         Nom = in.readString();
@@ -75,4 +82,9 @@ public class Creature implements Parcelable {
     public String toString(){
         return Nom;
     }
+    public void setImage(Bitmap image){
+        this.Image = image;
+
+    }
 }
+
