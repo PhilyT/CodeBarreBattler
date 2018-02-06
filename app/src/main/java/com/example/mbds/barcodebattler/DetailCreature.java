@@ -42,9 +42,9 @@ public class DetailCreature extends AppCompatActivity {
         Intent intent = getIntent();
         Creature creature =  intent.getParcelableExtra("creature");
         txtNom.setText(creature.Nom);
-        txtAttaque.setText("Attaque : "+creature.Attaque);
-        txtPv.setText("PV : "+creature.PV);
-        txtDefense.setText("Defense : "+creature.Defense);
+        txtAttaque.setText("Attaque : "+creature.getAttaque());
+        txtPv.setText("PV : "+creature.getPV());
+        txtDefense.setText("Defense : "+creature.getDefense());
         image.setImageBitmap(creature.Image);
 
         mListView =(ListView)findViewById(R.id.equipements);

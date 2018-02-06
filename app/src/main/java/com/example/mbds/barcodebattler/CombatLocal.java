@@ -59,6 +59,8 @@ public class CombatLocal extends AppCompatActivity {
         tourCreature1 = true;
         creature1 = (Creature)intent.getParcelableExtra("Creature1");
         creature2 = (Creature)intent.getParcelableExtra("Creature2");
+        creature1.PV = creature1.getPV();
+        creature2.PV = creature2.getPV();
         potionCpt = 30;
 
         // Custom Composant
@@ -109,7 +111,7 @@ public class CombatLocal extends AppCompatActivity {
 
     public void attaquer(Creature attaque, Creature defense){
         int jet = new Random().nextInt(6) +1;
-        int domage = (attaque.Attaque + jet - defense.Defense);
+        int domage = (attaque.getAttaque() + jet - defense.getDefense());
         if(domage<=1){
             domage = 1; // pour faire au moins 1 de domage minimum en cas de trop grande defense de la part de l'adversaire
         }

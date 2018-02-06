@@ -39,6 +39,36 @@ public class Creature implements Parcelable {
 
     }
 
+    public int getPV(){
+        int total = PV;
+        for (Equipement equipement : Equipements){
+            if (equipement.Attribut.equals(Attribut.Vie)){
+                total = total + equipement.Point;
+            }
+        }
+        return total;
+    }
+
+    public int getAttaque(){
+        int total = Attaque;
+        for (Equipement equipement : Equipements){
+            if (equipement.Attribut.equals(Attribut.Attaque)){
+                total = total + equipement.Point;
+            }
+        }
+        return total;
+    }
+
+    public int getDefense(){
+        int total = Defense;
+        for (Equipement equipement : Equipements){
+            if (equipement.Attribut.equals(Attribut.Defense)){
+                total = total + equipement.Point;
+            }
+        }
+        return total;
+    }
+
     protected Creature(Parcel in) {
         Nom = in.readString();
         int[] data = new int[3];

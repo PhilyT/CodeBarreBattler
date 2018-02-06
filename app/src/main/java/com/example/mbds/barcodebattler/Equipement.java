@@ -27,7 +27,10 @@ public class Equipement implements Parcelable {
     }
 
     protected Equipement(Parcel in) {
-        Id = in.readInt();
+        int[] data = new int[2];
+        in.readIntArray(data);
+        Id = data[0];
+        Point = data[1];
         String[] valeurs = new String[2];
         in.readStringArray(valeurs);
         Nom = valeurs[0];
@@ -55,7 +58,7 @@ public class Equipement implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         String[] valeurs = new String[]{Nom, Attribut.getKey()};
-        parcel.writeInt(Id);
+        parcel.writeIntArray(new int[]{Id, Point});
         parcel.writeStringArray(valeurs);
         parcel.writeParcelable(Image, i);
     }

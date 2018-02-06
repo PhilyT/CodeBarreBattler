@@ -12,6 +12,9 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class ChoixReseau extends AppCompatActivity {
 
     TextView title;
@@ -25,6 +28,7 @@ public class ChoixReseau extends AppCompatActivity {
     Spinner joueur;
     Button lancer;
     ImageView image;
+    Creature creatureSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,22 +50,25 @@ public class ChoixReseau extends AppCompatActivity {
 
         // Init data
         Equipement[] equipements1 = new Equipement[]{
-
+                new Equipement("baton", BitmapFactory.decodeResource(this.getResources(), R.mipmap.baton), 2, "Attaque"),
+                new Equipement("bouclier", BitmapFactory.decodeResource(this.getResources(), R.mipmap.bouclier), 6, "Defense")
         };
         Equipement[] equipements2 = new Equipement[]{
-
+                new Equipement("epee", BitmapFactory.decodeResource(this.getResources(), R.mipmap.epee), 6, "Attaque"),
+                new Equipement("bouclier", BitmapFactory.decodeResource(this.getResources(), R.mipmap.bouclier), 6, "Defense")
         };
         Equipement[] equipements3 = new Equipement[]{
-
+                new Equipement("casque", BitmapFactory.decodeResource(this.getResources(), R.mipmap.casque), 10, "Vie")
         };
         Creature[] items = new Creature[]{// Data for test
                 new Creature("toto", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(),
                         R.mipmap.archer_squelette),equipements1),
                 new Creature("titi", 30, 8, 8, BitmapFactory.decodeResource(this.getResources(),
                         R.mipmap.archidiable),equipements2),
-                new Creature("tata", 10, 20, 15, BitmapFactory.decodeResource(this.getResources(),
+                new Creature("tata", 10, 17, 15, BitmapFactory.decodeResource(this.getResources(),
                         R.mipmap.archidiablotin), equipements3)
         };
+        creatureSelected = items[0];
         String[] joueurs= new String[]{
                 "marco",
                 "polo",
@@ -71,18 +78,21 @@ public class ChoixReseau extends AppCompatActivity {
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, joueurs);
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         adapter2.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        DataEquipement adapterEquipements1 = new DataEquipement(ChoixReseau.this, new ArrayList<Equipement>(Arrays.asList(creatureSelected.Equipements)));
 
         // Set Widget
+        equipements.setAdapter(adapterEquipements1);
         choix.setAdapter(adapter);
         choix.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                Creature creatureSelected = (Creature)parentView.getItemAtPosition(position);
+                creatureSelected = (Creature)parentView.getItemAtPosition(position);
                 nom.setText(creatureSelected.Nom);
-                pv.setText("PV : "+creatureSelected.PV);
-                attaque.setText("Attaque : "+creatureSelected.Attaque);
-                defense.setText("Defense : "+creatureSelected.Defense);
+                pv.setText("PV : "+creatureSelected.getPV());
+                attaque.setText("Attaque : "+creatureSelected.getAttaque());
+                defense.setText("Defense : "+creatureSelected.getDefense());
                 image.setImageBitmap(creatureSelected.Image);
+                equipements.setAdapter(new DataEquipement(ChoixReseau.this, new ArrayList<Equipement>(Arrays.asList(creatureSelected.Equipements))));
             }
 
             @Override
