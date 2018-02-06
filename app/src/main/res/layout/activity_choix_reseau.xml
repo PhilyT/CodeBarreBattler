@@ -9,25 +9,46 @@
 
     <include layout="@layout/header" />
 
-    <Spinner
-        android:id="@+id/joueur"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="30dp"
-        style="@style/spinner_style"
-        android:spinnerMode="dropdown"/>
+        android:orientation="horizontal"
+        android:weightSum="5">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:text="Choix adversaire :"/>
+        <Spinner
+            android:id="@+id/joueur"
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/spinner_style"
+            android:spinnerMode="dropdown"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="30dp"
+        android:orientation="horizontal"
+        android:weightSum="5">
+        <Spinner
+            android:id="@+id/choix"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            style="@style/spinner_style"
+            android:spinnerMode="dropdown"/>
+    </LinearLayout>
 
-    <Spinner
-        android:id="@+id/choix"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="30dp"
-        style="@style/spinner_style"
-        android:spinnerMode="dropdown"/>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -120,10 +141,11 @@
             android:layout_weight="1"
             android:text="&lt; Retour" />
 
-        <View
+        <Button
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:text="Active Bluetooth\n"/>
 
         <Button
             android:id="@+id/lancer"
