@@ -1,5 +1,10 @@
 package com.example.mbds.barcodebattler;
 
+import android.app.AlertDialog;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,9 +19,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Set;
 
 public class ChoixReseau extends AppCompatActivity {
 
+    int REQUEST_ENABLE_BT = 2;
     TextView title;
     TextView nom;
     TextView pv;
@@ -26,9 +33,13 @@ public class ChoixReseau extends AppCompatActivity {
     Spinner choix;
     ListView equipements;
     Spinner joueur;
+    Set<BluetoothDevice> joueurs;
     Button lancer;
+    Button bluetooth;
     ImageView image;
     Creature creatureSelected;
+    BluetoothAdapter mBluetoothAdapter;
+    BluetoothDevice joueurSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +58,8 @@ public class ChoixReseau extends AppCompatActivity {
         equipements = (ListView) findViewById(R.id.equipements);
         lancer = (Button) findViewById(R.id.lancer );
         image = (ImageView) findViewById(R.id.image);
+        bluetooth = (Button) findViewById(R.id.bluetooth);
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         // Init data
         Equipement[] equipements1 = new Equipement[]{
@@ -69,16 +82,34 @@ public class ChoixReseau extends AppCompatActivity {
                         R.mipmap.archidiablotin), equipements3)
         };
         creatureSelected = items[0];
-        String[] joueurs= new String[]{
-                "marco",
-                "polo",
-                "fabio"
-        };
         ArrayAdapter<Creature> adapter = new ArrayAdapter<Creature>(this, android.R.layout.simple_spinner_item, items);
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, joueurs);
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        adapter2.setDropDownViewResource(R.layout.spinner_dropdown_item);
         DataEquipement adapterEquipements1 = new DataEquipement(ChoixReseau.this, new ArrayList<Equipement>(Arrays.asList(creatureSelected.Equipements)));
+
+        // bluetooth
+        if (mBluetoothAdapter == null) {
+            // si l’adapter est null, le téléphone ne supporte pas le bluetooth
+            AlertDialog.Builder builder = new AlertDialog.Builder(ChoixReseau.this);
+
+            builder.setMessage("La fonctionnalité bluetooth est indisponible sur ce device")
+                    .setTitle("Info");
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    joueur.setEnabled(false);
+                    lancer.setEnabled(false);
+                    bluetooth.setEnabled(false);
+                }
+            });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }else{
+            if (!mBluetoothAdapter.isEnabled()) {
+                activeBluetooth();
+            }else {
+                initializeDevices();
+            }
+        }
 
         // Set Widget
         equipements.setAdapter(adapterEquipements1);
@@ -99,7 +130,17 @@ public class ChoixReseau extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parentView) {
 
             }
+        });
+        joueur.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                joueurSelected = (BluetoothDevice)parentView.getItemAtPosition(position);
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+
+            }
         });
         retour.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,7 +148,43 @@ public class ChoixReseau extends AppCompatActivity {
                 finish();
             }
         });
-        joueur.setAdapter(adapter2);
+        bluetooth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activeBluetooth();
+            }
+        });
+        lancer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
         title.setText("Combat Reseau - Choix");
+    }
+
+    private void initializeDevices(){
+        joueurs = mBluetoothAdapter.getBondedDevices();
+        ArrayAdapter<BluetoothDevice> adapter2 = new ArrayAdapter<BluetoothDevice>(ChoixReseau.this, android.R.layout.simple_spinner_item, (BluetoothDevice[])joueurs.toArray());
+        adapter2.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        joueur.setAdapter(adapter2);
+    }
+
+    private void activeBluetooth(){
+        Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+        startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_ENABLE_BT){
+            if(resultCode == 1){
+                initializeDevices();
+            }else{
+                joueur.setEnabled(false);
+                lancer.setEnabled(false);
+            }
+        }
     }
 }
