@@ -21,7 +21,12 @@ public class Equipement implements Parcelable {
         Point = point;
         Attribut = Attribut.valueOf(attribut);
     }
+    public Equipement(String nom, int point, String attribut){
+        Nom = nom;
 
+        Point = point;
+        Attribut = Attribut.valueOf(attribut);
+    }
     public Equipement(){
 
     }
@@ -61,5 +66,9 @@ public class Equipement implements Parcelable {
         parcel.writeIntArray(new int[]{Id, Point});
         parcel.writeStringArray(valeurs);
         parcel.writeParcelable(Image, i);
+    }
+    public void setImage(Bitmap image){
+        this.Image = image;
+
     }
 }

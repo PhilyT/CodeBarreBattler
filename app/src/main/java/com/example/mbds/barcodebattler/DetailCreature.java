@@ -23,7 +23,7 @@ import java.util.Arrays;
 import static com.example.mbds.barcodebattler.R.id.spinner;
 
 public class DetailCreature extends AppCompatActivity {
-    TextView txtNom ,txtPv, txtAttaque, txtDefense;
+    TextView txtNom ,txtPv, txtAttaque, txtDefense, retour;
     ImageView image ;
     ListView mListView;
 
@@ -32,7 +32,7 @@ public class DetailCreature extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_creature);
         initialise();
-
+        retour =  (TextView) findViewById(R.id.retour);
         txtNom=(TextView)findViewById(R.id.nom);
         txtPv=(TextView)findViewById(R.id.pv);
         txtAttaque=(TextView) findViewById(R.id.attaque);
@@ -70,6 +70,12 @@ public class DetailCreature extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
+            }
+        });
+        retour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
