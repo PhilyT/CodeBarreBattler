@@ -18,12 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChoixLocal"></activity>
-        <activity android:name=".ChoixReseau"></activity>
-        <activity android:name=".CombatLocal"></activity>
-        <activity android:name=".CombatReseau"></activity>
+        <activity android:name=".ChoixLocal" />
+        <activity android:name=".ChoixReseau" />
+        <activity android:name=".CombatLocal" />
+        <activity android:name=".CombatReseau" />
         <activity android:name=".Gestion" />
-        <activity android:name=".DetailCreature"></activity>
+        <activity android:name=".DetailCreature" />
+        <activity android:name=".generateRobotActivity"></activity>
     </application>
 
 </manifest>

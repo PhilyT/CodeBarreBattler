@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -18,6 +19,7 @@ import com.google.zxing.integration.android.IntentResult;
 public class MainActivity extends AppCompatActivity {
     //ImageView image;
     private Button button ,gestion ,local,reseau;
+    TextView code;
 
 
     @Override
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
        // image = (ImageView)findViewById(R.id.image);
         //image.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.assassin));
         button = (Button) this.findViewById(R.id.button);
+        code =(TextView)this.findViewById(R.id.code);
         final Activity activity = this;
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,8 +77,11 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("MainActivity", "Cancelled scan");
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             } else {
-                Log.d("MainActivity", "Scanned");
-                Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+                //Log.d("MainActivity", "Scanned");
+                //Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(MainActivity.this,generateRobotActivity.class);
+                intent.putExtra("scanCode",result.getContents());
+                startActivityForResult(intent,1);
             }
         } else {
             // This is important, otherwise the result will not be passed to the fragment
