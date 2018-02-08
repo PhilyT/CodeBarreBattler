@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -25,15 +27,20 @@ TextView code ;
     TextView txtNom ,txtPv, txtAttaque, txtDefense, retour;
     ImageView image ;
     ListView mListView;
+    Button ajout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generate_robot);
         code =(TextView) this.findViewById(R.id.code);
+        ajout=(Button)this.findViewById(R.id.ajout);
         initialise();
+
+
         Intent intent = getIntent();
         code.setText(intent.getStringExtra("scanCode"));
-        Creature robotgenerate = creatures.get(ThreadLocalRandom.current().nextInt(0, creatures.size()));
+
+        final Creature robotgenerate = creatures.get(ThreadLocalRandom.current().nextInt(0, creatures.size()));
 
 
         txtNom=(TextView)findViewById(R.id.nom);
@@ -54,6 +61,20 @@ TextView code ;
         DataEquipement dataEquiment = new DataEquipement(generateRobotActivity.this,new ArrayList<Equipement>(Arrays.asList(robotgenerate.Equipements)));
 
         mListView.setAdapter(dataEquiment);
+
+
+        ajout.setOnClickListener(new View.OnClickListener(){
+
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(generateRobotActivity.this,Gestion.class);
+
+                intent.putExtra("creature",robotgenerate);
+                startActivityForResult(intent,1);
+
+            }
+        });
 
     }
     public void initialise(){

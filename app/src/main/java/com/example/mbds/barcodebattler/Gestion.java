@@ -95,7 +95,10 @@ public class Gestion extends AppCompatActivity {
 
             }
         });
-
+//recuperaton de la creature generée par le scan
+        Intent intent = getIntent();
+        Creature creature =  intent.getParcelableExtra("creature");
+        creatures.add(creature);
 
     }
     public void initialise(){
