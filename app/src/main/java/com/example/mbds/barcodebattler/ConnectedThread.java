@@ -14,22 +14,23 @@ import static android.content.ContentValues.TAG;
  * Created by Tom on 08/02/2018.
  */
 
-public class ConnectedThread extends Thread {
+public abstract class ConnectedThread extends Thread {
     private final BluetoothSocket mmSocket;
     private final BluetoothDevice mmDevice;
     private UUID MY_UUID;
     private BluetoothAdapter mBluetoothAdapter;
 
-    public ConnectedThread(BluetoothDevice device) {
+    public ConnectedThread(BluetoothDevice device, BluetoothAdapter mBluetoothAdapter) {
         // Use a temporary object that is later assigned to mmSocket
         // because mmSocket is final.
         BluetoothSocket tmp = null;
+        this.mBluetoothAdapter = mBluetoothAdapter;
         mmDevice = device;
 
         try {
             // Get a BluetoothSocket to connect with the given BluetoothDevice.
             // MY_UUID is the app's UUID string, also used in the server code.
-            tmp = device.createRfcommSocketToServiceRecord(MY_UUID);
+            tmp = mmDevice.createRfcommSocketToServiceRecord(MY_UUID);
         } catch (IOException e) {
             Log.e(TAG, "Socket's create() method failed", e);
         }
@@ -58,6 +59,8 @@ public class ConnectedThread extends Thread {
         // the connection in a separate thread.
         //manageMyConnectedSocket(mmSocket);
     }
+
+    public abstract void send();
 
     // Closes the client socket and causes the thread to finish.
     public void cancel() {

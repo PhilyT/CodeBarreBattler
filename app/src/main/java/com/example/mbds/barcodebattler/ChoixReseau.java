@@ -20,6 +20,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Set;
+import java.util.UUID;
 
 public class ChoixReseau extends AppCompatActivity {
 
@@ -42,6 +43,8 @@ public class ChoixReseau extends AppCompatActivity {
     BluetoothDevice joueurSelected;
     Boolean sendCreature;
     Creature creatureAdverse;
+    AcceptThread server;
+    ConnectedThread client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -192,6 +195,14 @@ public class ChoixReseau extends AppCompatActivity {
     private void activeBluetooth(){
         Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
         startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+        server = new AcceptThread("", new UUID(Long.MAX_VALUE, Long.MIN_VALUE), mBluetoothAdapter){
+            @Override
+            public void onReception(Intent data){
+                if (sendCreature){
+                    
+                }
+            }
+        };
     }
 
     @Override
