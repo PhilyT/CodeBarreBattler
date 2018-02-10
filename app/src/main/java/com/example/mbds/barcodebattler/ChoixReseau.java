@@ -33,20 +33,22 @@ public class ChoixReseau extends AppCompatActivity {
     Spinner choix;
     ListView equipements;
     Spinner joueur;
-    Set<BluetoothDevice> joueurs;
+    ArrayList<BluetoothDevice> joueurs;
     Button lancer;
     Button bluetooth;
     ImageView image;
     Creature creatureSelected;
     BluetoothAdapter mBluetoothAdapter;
     BluetoothDevice joueurSelected;
+    Boolean sendCreature;
+    Creature creatureAdverse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choix_reseau);
 
-        // Init widget
+        // Init widgets
         title =  (TextView) findViewById(R.id.title);
         nom =  (TextView) findViewById(R.id.nom);
         pv =  (TextView) findViewById(R.id.pv);
@@ -62,6 +64,7 @@ public class ChoixReseau extends AppCompatActivity {
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         // Init data
+        sendCreature = false;
         Equipement[] equipements1 = new Equipement[]{
                 new Equipement("baton", BitmapFactory.decodeResource(this.getResources(), R.mipmap.baton), 2, "Attaque"),
                 new Equipement("bouclier", BitmapFactory.decodeResource(this.getResources(), R.mipmap.bouclier), 6, "Defense")
@@ -107,11 +110,12 @@ public class ChoixReseau extends AppCompatActivity {
             if (!mBluetoothAdapter.isEnabled()) {
                 activeBluetooth();
             }else {
+                bluetooth.setEnabled(false);
                 initializeDevices();
             }
         }
 
-        // Set Widget
+        // Set Widgets
         equipements.setAdapter(adapterEquipements1);
         choix.setAdapter(adapter);
         choix.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -134,7 +138,7 @@ public class ChoixReseau extends AppCompatActivity {
         joueur.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                joueurSelected = (BluetoothDevice)parentView.getItemAtPosition(position);
+                joueurSelected = joueurs.get(position);
             }
 
             @Override
@@ -157,15 +161,30 @@ public class ChoixReseau extends AppCompatActivity {
         lancer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                sendCreature = true;
+                choix.setEnabled(false);
+                joueur.setEnabled(false);
+                if (creatureAdverse != null){
+                    Intent intent = new Intent(ChoixReseau.this,CombatReseau.class);
+                    intent.putExtra("Creature1", creatureSelected);
+                    intent.putExtra("Creature2", creatureAdverse);
+                    intent.putExtra("DeviceAdverse", joueurSelected);
+                    startActivityForResult(intent,1);
+                }else{
+                    lancer.setText("Attente du joueur adverse");
+                }
             }
         });
         title.setText("Combat Reseau - Choix");
     }
 
     private void initializeDevices(){
-        joueurs = mBluetoothAdapter.getBondedDevices();
-        ArrayAdapter<BluetoothDevice> adapter2 = new ArrayAdapter<BluetoothDevice>(ChoixReseau.this, android.R.layout.simple_spinner_item, (BluetoothDevice[])joueurs.toArray());
+        joueurs = new ArrayList<BluetoothDevice>(mBluetoothAdapter.getBondedDevices());
+        String[] joueursInfo = new String[joueurs.size()];
+        for(int i = 0; i<joueurs.size(); i++){
+            joueursInfo[i]=joueurs.get(i).getName() + "\n" + joueurs.get(i).getAddress();
+        }
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(ChoixReseau.this, android.R.layout.simple_spinner_item, joueursInfo);
         adapter2.setDropDownViewResource(R.layout.spinner_dropdown_item);
         joueur.setAdapter(adapter2);
     }
@@ -179,7 +198,7 @@ public class ChoixReseau extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQUEST_ENABLE_BT){
-            if(resultCode == 1){
+            if(resultCode == -1){
                 initializeDevices();
             }else{
                 joueur.setEnabled(false);
