@@ -1,62 +1,50 @@
 package com.example.mbds.barcodebattler;
 
-import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.Intent;
 import android.util.Log;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.UUID;
 
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by Tom on 08/02/2018.
  */
 
-public class ConnectedThread extends Thread {
-    private final BluetoothSocket mmSocket;
-    private final BluetoothDevice mmDevice;
-    private UUID MY_UUID;
-    private BluetoothAdapter mBluetoothAdapter;
+public class ConnectedThread {
+    private static final String TAG = "MY_APP_DEBUG_TAG";
+    private OutputStream mmOutStream;
+
+    private BluetoothSocket mmSocket;
 
     public ConnectedThread(BluetoothDevice device) {
         // Use a temporary object that is later assigned to mmSocket
         // because mmSocket is final.
         BluetoothSocket tmp = null;
-        mmDevice = device;
+        OutputStream tmpOut = null;
 
         try {
             // Get a BluetoothSocket to connect with the given BluetoothDevice.
             // MY_UUID is the app's UUID string, also used in the server code.
-            tmp = device.createRfcommSocketToServiceRecord(MY_UUID);
+            tmp = device.createRfcommSocketToServiceRecord(UUID.fromString("2,5"));
+            tmpOut = tmp.getOutputStream();
         } catch (IOException e) {
             Log.e(TAG, "Socket's create() method failed", e);
         }
+        mmOutStream = tmpOut;
         mmSocket = tmp;
     }
 
-    public void run() {
-        // Cancel discovery because it otherwise slows down the connection.
-        mBluetoothAdapter.cancelDiscovery();
-
+    public void send(Intent data) {
+        byte[] mmbyte = data.getByteArrayExtra("Creature");
         try {
-            // Connect to the remote device through the socket. This call blocks
-            // until it succeeds or throws an exception.
-            mmSocket.connect();
-        } catch (IOException connectException) {
-            // Unable to connect; close the socket and return.
-            try {
-                mmSocket.close();
-            } catch (IOException closeException) {
-                Log.e(TAG, "Could not close the client socket", closeException);
-            }
-            return;
+            mmOutStream.write(mmbyte);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        // The connection attempt succeeded. Perform work associated with
-        // the connection in a separate thread.
-        //manageMyConnectedSocket(mmSocket);
     }
 
     // Closes the client socket and causes the thread to finish.
