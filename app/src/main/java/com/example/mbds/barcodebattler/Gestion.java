@@ -1,6 +1,7 @@
 package com.example.mbds.barcodebattler;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,13 +30,16 @@ public class Gestion extends AppCompatActivity {
     ArrayList<Equipement> equipements = new ArrayList<Equipement>();
     int potion=30;
     TextView points;
+    MonHelper  dataBase = new MonHelper(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gestion);
-        initialise();
+        //initialise();
         mListView =(ListView)findViewById(R.id.listView) ;
+        loadCreatureFromDatabase();
+
         points=  (TextView) findViewById(R.id.points);
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         String[] items = new String[] { "Creatures", "Equipements", "Potions"  };
@@ -95,11 +99,20 @@ public class Gestion extends AppCompatActivity {
 
             }
         });
-//recuperaton de la creature generée par le scan
-        Intent intent = getIntent();
+        /*Intent intent = getIntent();
         Creature creature =  intent.getParcelableExtra("creature");
-        creatures.add(creature);
+        creatures.add(creature);*/
 
+
+    }
+
+    private void loadCreatureFromDatabase()
+    {
+        ArrayList<Creature> creat = this.dataBase.getAllCreatures();
+       for(Creature c:creat){
+           creatures.add(c);
+       }
+        mListView.invalidateViews();
     }
     public void initialise(){
         equipements.add(new Equipement("baton", BitmapFactory.decodeResource(this.getResources(), R.mipmap.baton), 2, "Attaque"));

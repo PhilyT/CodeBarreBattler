@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     //ImageView image;
     private Button button ,gestion ,local,reseau;
     TextView code;
+    MonHelper  dataBase = new MonHelper(this);
 
 
     @Override
@@ -87,5 +88,14 @@ public class MainActivity extends AppCompatActivity {
             // This is important, otherwise the result will not be passed to the fragment
             super.onActivityResult(requestCode, resultCode, data);
         }
+        if(resultCode==2){
+            Creature creature =  data.getParcelableExtra("creature");
+            Intent intent = new Intent(MainActivity.this,Gestion.class);
+
+            //intent.putExtra("creature",creature);
+            dataBase.addCreature(creature.Nom , creature.PV,creature.Defense , creature.Attaque , creature.Image);
+            startActivityForResult(intent,2);
+        }
     }
+
 }

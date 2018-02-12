@@ -68,10 +68,11 @@ TextView code ;
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(generateRobotActivity.this,Gestion.class);
+                Intent intent = new Intent(generateRobotActivity.this,MainActivity.class);
 
                 intent.putExtra("creature",robotgenerate);
-                startActivityForResult(intent,1);
+                setResult(2,intent);
+                finish();
 
             }
         });

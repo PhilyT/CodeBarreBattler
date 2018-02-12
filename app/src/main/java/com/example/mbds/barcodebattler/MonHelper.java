@@ -49,10 +49,10 @@ public class MonHelper extends SQLiteOpenHelper {
             "  "+COLUMN_PV  +"  "+"INTEGER ,"+
             "  "+COLUMN_defense  +"  "+"INTEGER ,"+
             "  "+COLUMN_attaque  +"  "+"INTEGER ,"+
-            "  "+COLUMN_IMAGE  +"  "+"BLOB NOT NULL"+
-            "  "+COLUMN_equipementID  +"  "+"INTEGER ,"+
-            "   "+COLUMN_EQUIPEMENT+""+" FOREIGN KEY("+COLUMN_equipementID+" ) REFERENCES equipement(COLUMN_IDE),"+");";
+            "  "+COLUMN_IMAGE  +"  "+"BLOB NOT NULL"+ ");";
 
+        /* "  "+COLUMN_equipementID  +"  "+"INTEGER ,"+
+            "   "+COLUMN_EQUIPEMENT+""+" FOREIGN KEY("+COLUMN_equipementID+" ) REFERENCES equipement(COLUMN_IDE),"+*/
 
 
 
@@ -121,7 +121,7 @@ public class MonHelper extends SQLiteOpenHelper {
         {
             do {
                 Creature c = new Creature(creat.getString(1),creat.getInt(2),creat.getInt(3),creat.getInt(4));
-                byte[] image = creat.getBlob(3);
+                byte[] image = creat.getBlob(5);
                 c.setImage(BitmapFactory.decodeByteArray(image,0, image.length));
                 creatures.add(c);
 
