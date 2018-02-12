@@ -168,13 +168,10 @@ public class ChoixReseau extends AppCompatActivity {
                 choix.setEnabled(false);
                 joueur.setEnabled(false);
                 if (creatureAdverse != null){
-                    Intent intent = new Intent(ChoixReseau.this,CombatReseau.class);
-                    intent.putExtra("Creature1", creatureSelected);
-                    intent.putExtra("Creature2", creatureAdverse);
-                    intent.putExtra("DeviceAdverse", joueurSelected);
-                    startActivityForResult(intent,1);
+                    startNextActivity(false);
                 }else{
                     lancer.setText("Attente du joueur adverse");
+                    lancer.setEnabled(false);
                 }
             }
         });
@@ -192,17 +189,56 @@ public class ChoixReseau extends AppCompatActivity {
         joueur.setAdapter(adapter2);
     }
 
+    private void startNextActivity(boolean first){
+        Intent intent = new Intent(ChoixReseau.this,CombatReseau.class);
+        intent.putExtra("Creature1", creatureSelected);
+        intent.putExtra("Creature2", creatureAdverse);
+        intent.putExtra("Device", joueurSelected);
+        intent.putExtra("Fisrt", first);
+        startActivityForResult(intent,1);
+        server.cancel();
+    }
+
     private void activeBluetooth(){
         Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
         startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-        server = new AcceptThread("", new UUID(Long.MAX_VALUE, Long.MIN_VALUE), mBluetoothAdapter){
+        server = new AcceptThread(mBluetoothAdapter){
             @Override
-            public void onReception(Intent data){
-                if (sendCreature){
-                    
+            public void onReception(final Intent data){
+                final BluetoothDevice device = (BluetoothDevice)data.getParcelableExtra("device");
+                if(device.equals(joueurSelected)){
+                    creatureAdverse = (Creature) data.getParcelableExtra("Creature");
+                    if (sendCreature){
+                        startNextActivity(true);
+                    }else{
+                        lancer.setText("Lancer le Combat");
+                    }
+                }else{
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ChoixReseau.this);
+                    builder.setMessage("Le joueur "+device.getName()+" veut vous affronter, voulez-vous relever le défi ? ")
+                            .setTitle("Duel");
+                    builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            creatureAdverse = (Creature) data.getParcelableExtra("Creature");
+                            sendCreature = false;
+                            lancer.setText("Lancer le Combat");
+                            choix.setEnabled(true);
+                            lancer.setEnabled(true);
+                            joueurSelected = device;
+                            joueur.setEnabled(false);
+                        }
+                    });
+                    builder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
                 }
             }
         };
+        server.start();
     }
 
     @Override
