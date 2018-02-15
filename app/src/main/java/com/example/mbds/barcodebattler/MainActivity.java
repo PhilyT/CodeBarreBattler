@@ -94,6 +94,14 @@ public class MainActivity extends AppCompatActivity {
 
             //intent.putExtra("creature",creature);
             dataBase.addCreature(creature.Nom , creature.PV,creature.Defense , creature.Attaque , creature.Image);
+
+            if(creature.Equipements!=null){
+                for(Equipement e : creature.Equipements){
+                    e.CreatureID=creature.Id ;
+                    System.out.print(e);
+                    dataBase.addEquipement(e);
+                }
+            }
             startActivityForResult(intent,2);
         }
     }

@@ -31,6 +31,15 @@ public class Creature implements Parcelable {
         Image = image;
         Equipements = equipements;
     }
+    public Creature(int id ,String nom, int pv, int defense, int attaque){
+        Id=id;
+        Nom = nom;
+        PV = pv;
+        Attaque = attaque;
+        Defense = defense;
+
+
+    }
     public Creature(String nom, int pv, int defense, int attaque){
         Nom = nom;
         PV = pv;

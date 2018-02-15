@@ -14,6 +14,7 @@ public class Equipement implements Parcelable {
     public Bitmap Image;
     public int Point;
     public Attribut Attribut;
+    public int CreatureID ;
 
     public Equipement(String nom, Bitmap image, int point, String attribut){
         Nom = nom;
@@ -30,7 +31,17 @@ public class Equipement implements Parcelable {
     public Equipement(){
 
     }
+public Equipement(String nom, Bitmap image , int point , int creatureID ){
+    Nom=nom;
+    Image=image;
+    Point = point ;
+    CreatureID=creatureID;
+}
+    public Equipement(String nom, int point ){
+        Nom=nom;
+        Point = point ;
 
+    }
     protected Equipement(Parcel in) {
         int[] data = new int[2];
         in.readIntArray(data);

@@ -38,7 +38,7 @@ public class Gestion extends AppCompatActivity {
         setContentView(R.layout.activity_gestion);
         //initialise();
         mListView =(ListView)findViewById(R.id.listView) ;
-        loadCreatureFromDatabase();
+
 
         points=  (TextView) findViewById(R.id.points);
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
@@ -56,6 +56,7 @@ public class Gestion extends AppCompatActivity {
                 String item = (String) parent.getItemAtPosition(position);
 
                 if(item.equalsIgnoreCase("Creatures")){
+                    creatures =loadCreatureFromDatabase();
                     final DataCreature dataCreature = new DataCreature(Gestion.this,creatures);
 
                     mListView.setAdapter(dataCreature);
@@ -76,6 +77,7 @@ public class Gestion extends AppCompatActivity {
 
                 }
                 else if(item.equalsIgnoreCase("Equipements")){
+                    equipements=loadEquipementFromDatabase();
                     DataEquipement dataEquiment = new DataEquipement(Gestion.this,equipements);
 
                     mListView.setAdapter(dataEquiment);
@@ -106,13 +108,19 @@ public class Gestion extends AppCompatActivity {
 
     }
 
-    private void loadCreatureFromDatabase()
+    private ArrayList<Creature> loadCreatureFromDatabase()
     {
         ArrayList<Creature> creat = this.dataBase.getAllCreatures();
-       for(Creature c:creat){
-           creatures.add(c);
-       }
-        mListView.invalidateViews();
+       //for(Creature c:creat){
+         //  creatures.add(c);
+      // }
+       // mListView.invalidateViews();
+        return creat ;
+    }
+    private  ArrayList<Equipement> loadEquipementFromDatabase()
+    {
+        ArrayList<Equipement> equip = this.dataBase.getAllEquipements();
+        return equip;
     }
     public void initialise(){
         equipements.add(new Equipement("baton", BitmapFactory.decodeResource(this.getResources(), R.mipmap.baton), 2, "Attaque"));
