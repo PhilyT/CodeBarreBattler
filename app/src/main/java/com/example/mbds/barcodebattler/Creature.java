@@ -48,34 +48,43 @@ public class Creature implements Parcelable {
 
     }
 
-    public int getPV(){
+    public int getPV() {
         int total = PV;
-        for (Equipement equipement : Equipements){
-            if (equipement.Attribut.equals(Attribut.Vie)){
-                total = total + equipement.Point;
+        if (Equipements != null) {
+            for (Equipement equipement : Equipements) {
+                if (equipement.Attribut.equals(Attribut.Vie)) {
+                    total = total + equipement.Point;
+                }
             }
+            return total;
         }
-        return total;
+        return 0 ;
     }
 
-    public int getAttaque(){
+    public int getAttaque() {
         int total = Attaque;
-        for (Equipement equipement : Equipements){
-            if (equipement.Attribut.equals(Attribut.Attaque)){
-                total = total + equipement.Point;
+        if (Equipements != null) {
+            for (Equipement equipement : Equipements) {
+                if (equipement.Attribut.equals(Attribut.Attaque)) {
+                    total = total + equipement.Point;
+                }
             }
+            return total;
         }
-        return total;
+        return 0 ;
     }
 
     public int getDefense(){
         int total = Defense;
-        for (Equipement equipement : Equipements){
-            if (equipement.Attribut.equals(Attribut.Defense)){
-                total = total + equipement.Point;
+        if(Equipements!=null) {
+            for (Equipement equipement : Equipements) {
+                if (equipement.Attribut.equals(Attribut.Defense)) {
+                    total = total + equipement.Point;
+                }
             }
+            return total;
         }
-        return total;
+        return 0 ;
     }
 
     protected Creature(Parcel in) {
@@ -86,8 +95,10 @@ public class Creature implements Parcelable {
         Attaque = data[1];
         Defense = data[2];
         Image = in.readParcelable(Bitmap.class.getClassLoader());
-        Parcelable[] dataEquipements = in.readParcelableArray(Equipement.class.getClassLoader());
-        Equipements = Arrays.copyOf(dataEquipements, dataEquipements.length, Equipement[].class);
+
+       Parcelable[] dataEquipements = in.readParcelableArray(Equipement.class.getClassLoader());
+        if(dataEquipements!=null){
+       Equipements = Arrays.copyOf(dataEquipements, dataEquipements.length, Equipement[].class);}
         Id = in.readInt();
     }
 

@@ -26,7 +26,7 @@ public class DetailCreature extends AppCompatActivity {
     TextView txtNom ,txtPv, txtAttaque, txtDefense, retour;
     ImageView image ;
     ListView mListView;
-
+MonHelper database = new MonHelper(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,8 +48,9 @@ public class DetailCreature extends AppCompatActivity {
         image.setImageBitmap(creature.Image);
 
         mListView =(ListView)findViewById(R.id.equipements);
-        DataEquipement dataEquiment = new DataEquipement(DetailCreature.this,new ArrayList<Equipement>(Arrays.asList(creature.Equipements)));
-
+        ArrayList<Equipement>equipementsCreat = equipementsCreature(creature);
+        DataEquipement dataEquiment = new DataEquipement(DetailCreature.this,equipementsCreat);
+        System.out.print("la taille de m"+equipementsCreature(creature).size());
         mListView.setAdapter(dataEquiment);
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
@@ -79,10 +80,18 @@ public class DetailCreature extends AppCompatActivity {
             }
         });
     }
+    ArrayList<Equipement> equipementsCreature(Creature creature){
+        ArrayList<Equipement> equipements = database.getAllEquipements();
+        ArrayList<Equipement> equipementsCreatures = new ArrayList<Equipement>();
+        if(!equipements.isEmpty()) {
+            for (Equipement e : equipements) {
+                if (e.CreatureID == creature.Id) {
+                    equipementsCreatures.add(e);
+                }
+            }
+        }
+        return equipementsCreatures ;
+    }
     public void initialise(){
-
-
-
-
     }
 }

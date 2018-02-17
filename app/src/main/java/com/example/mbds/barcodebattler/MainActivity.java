@@ -93,13 +93,13 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this,Gestion.class);
 
             //intent.putExtra("creature",creature);
-            dataBase.addCreature(creature.Nom , creature.PV,creature.Defense , creature.Attaque , creature.Image);
-
+            creature.Id= dataBase.addCreature(creature.Nom , creature.PV,creature.Defense , creature.Attaque , creature.Image);
+            System.out.print(creature.Id);
             if(creature.Equipements!=null){
                 for(Equipement e : creature.Equipements){
                     e.CreatureID=creature.Id ;
                     System.out.print(e);
-                    dataBase.addEquipement(e);
+                    dataBase.addEquipement(e.Nom , e.Point,e.Image,e.CreatureID);
                 }
             }
             startActivityForResult(intent,2);

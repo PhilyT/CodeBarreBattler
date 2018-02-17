@@ -37,27 +37,26 @@ public class MonHelper extends SQLiteOpenHelper {
     private static final String COLUMN_equipementID  = "attribut";
     private static final String COLUMN_creatureID="cretureID";
 
-    private static  final String tableEquipement ="CREATE TABLE "+TABLE_Equipement+"("+COLUMN_IDE +" "+"INTEGER PRIMARY KEY AUTOINCREMENT,"+
-            "  "+COLUMN_NAME +"  "+ "TEXT NOT NULL,"+
-            "  "+COLUMN_Point  +"  "+"INTEGER ,"+
-            "  "+COLUMN_IMAGEE +"  "+"BLOB NOT NULL,"+
-            "  "+COLUMN_creatureID  +"  "+"INTEGER "+");";
-
-
-            //"   "+COLUMN_creatureID+" "+" FOREIGN KEY("+COLUMN_creatureID+" ) REFERENCES creature(COLUMN_IDE),"+");";
-    //"  "+COLUMN_attribut  +"  "+"TEXT NOT NULL ,"+
-
-
     private static  final String tableCreature="CREATE TABLE "+TABLE_Creature+"("+COLUMN_ID +" "+"INTEGER PRIMARY KEY AUTOINCREMENT,"+
             "  "+COLUMN_NOM +"  "+ "TEXT NOT NULL,"+
             "  "+COLUMN_PV  +"  "+"INTEGER ,"+
             "  "+COLUMN_defense  +"  "+"INTEGER ,"+
             "  "+COLUMN_attaque  +"  "+"INTEGER ,"+
-            "  "+COLUMN_IMAGE  +"  "+"BLOB NOT NULL"+ ");";
+            "  "+COLUMN_IMAGE  +"  "+"BLOB NOT NULL"+ ")";
 
 
         /* "  "+COLUMN_equipementID  +"  "+"INTEGER ,"+
             "   "+COLUMN_EQUIPEMENT+""+" FOREIGN KEY("+COLUMN_equipementID+" ) REFERENCES equipement(COLUMN_IDE),"+*/
+
+
+    private static  final String tableEquipement ="CREATE TABLE "+TABLE_Equipement+"("+COLUMN_IDE +" "+"INTEGER PRIMARY KEY AUTOINCREMENT,"+
+            "  "+COLUMN_NAME +"  "+ "TEXT NOT NULL,"+
+            "  "+COLUMN_Point  +"  "+"INTEGER ,"+
+            "  "+COLUMN_IMAGEE +"  "+"BLOB NOT NULL,"+
+            "  "+COLUMN_creatureID  +"  "+"INTEGER NOT NULL,FOREIGN KEY("+COLUMN_creatureID+" ) REFERENCES creature(COLUMN_IDE)"+")";
+    //"  "+COLUMN_attribut  +"  "+"TEXT NOT NULL ,"+
+
+
 
 
 
@@ -85,7 +84,7 @@ public class MonHelper extends SQLiteOpenHelper {
         onCreate(db);
 
     }
-    public Boolean  addCreature(String name , Integer PV,Integer defense , Integer attaque , Bitmap image){
+    public int addCreature(String name , Integer PV,Integer defense , Integer attaque , Bitmap image){
         ContentValues content = new ContentValues();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_NOM, name);
@@ -101,19 +100,19 @@ public class MonHelper extends SQLiteOpenHelper {
 
         contentValues.put(COLUMN_IMAGE, byteArrayImage );
         SQLiteDatabase db = getWritableDatabase();
-        return db.insert(TABLE_Creature, null, contentValues) != -1;
+        return (int)db.insert(TABLE_Creature, null, contentValues) ;
 
     }
-    public Boolean  addEquipement(Equipement e){
+    public Boolean  addEquipement(String nom , int point  , Bitmap image, int creatureID){
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_NAME, e.Nom);
+        contentValues.put(COLUMN_NAME, nom);
         //contentValues.put(COLUMN_attribut,attribut);
-        contentValues.put(COLUMN_Point,e.Point);
-        contentValues.put(COLUMN_creatureID, e.CreatureID);
+        contentValues.put(COLUMN_Point,point);
+        contentValues.put(COLUMN_creatureID, creatureID);
 
         ByteArrayOutputStream boas = new ByteArrayOutputStream();
-        e.Image.compress(Bitmap.CompressFormat.JPEG, 100, boas ); //bm is the bitmap object
+        image.compress(Bitmap.CompressFormat.JPEG, 100, boas ); //bm is the bitmap object
         byte[] byteArrayImage = boas.toByteArray();
 
         contentValues.put(COLUMN_IMAGEE, byteArrayImage );
@@ -155,6 +154,7 @@ public class MonHelper extends SQLiteOpenHelper {
             do {
                 Equipement q = new Equipement (equip.getString(1),equip.getInt(2));
                 q.Id=equip.getInt(0);
+                q.CreatureID=equip.getInt(4);
                 byte[] image = equip.getBlob(3);
                 q.setImage(BitmapFactory.decodeByteArray(image,0, image.length));
                 equipements.add(q);
@@ -167,4 +167,5 @@ public class MonHelper extends SQLiteOpenHelper {
 
 
     }
+
 }
