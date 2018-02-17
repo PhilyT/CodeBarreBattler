@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                 for(Equipement e : creature.Equipements){
                     e.CreatureID=creature.Id ;
                     System.out.print(e);
-                    dataBase.addEquipement(e.Nom , e.Point,e.Image,e.CreatureID);
+                    dataBase.addEquipement(e.Nom , e.Point,e.Image,e.Attribut,e.CreatureID);
                 }
             }
             startActivityForResult(intent,2);

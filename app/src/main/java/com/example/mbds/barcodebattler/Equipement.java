@@ -13,14 +13,14 @@ public class Equipement implements Parcelable {
     public String Nom;
     public Bitmap Image;
     public int Point;
-    public Attribut Attribut;
+    public String Attribut;
     public int CreatureID ;
 
     public Equipement(String nom, Bitmap image, int point, String attribut){
         Nom = nom;
         Image = image;
         Point = point;
-        Attribut = Attribut.valueOf(attribut);
+        Attribut = attribut;
     }
     public Equipement(String nom, int point, String attribut){
         Nom = nom;
@@ -31,11 +31,13 @@ public class Equipement implements Parcelable {
     public Equipement(){
 
     }
-public Equipement(String nom, Bitmap image , int point , int creatureID ){
+public Equipement(String nom, Bitmap image , int point , String attribut ,int creatureID ){
     Nom=nom;
     Image=image;
     Point = point ;
+    Attribut= attribut;
     CreatureID=creatureID;
+
 }
     public Equipement(String nom, int point ){
         Nom=nom;
@@ -73,7 +75,7 @@ public Equipement(String nom, Bitmap image , int point , int creatureID ){
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        String[] valeurs = new String[]{Nom, Attribut.getKey()};
+        String[] valeurs = new String[]{Nom, Attribut};
         parcel.writeIntArray(new int[]{Id, Point});
         parcel.writeStringArray(valeurs);
         parcel.writeParcelable(Image, i);

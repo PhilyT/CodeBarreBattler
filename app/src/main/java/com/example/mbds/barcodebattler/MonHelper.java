@@ -53,6 +53,7 @@ public class MonHelper extends SQLiteOpenHelper {
             "  "+COLUMN_NAME +"  "+ "TEXT NOT NULL,"+
             "  "+COLUMN_Point  +"  "+"INTEGER ,"+
             "  "+COLUMN_IMAGEE +"  "+"BLOB NOT NULL,"+
+            "  "+COLUMN_attribut  +"  "+"TEXT NOT NULL ,"+
             "  "+COLUMN_creatureID  +"  "+"INTEGER NOT NULL,FOREIGN KEY("+COLUMN_creatureID+" ) REFERENCES creature(COLUMN_IDE)"+")";
     //"  "+COLUMN_attribut  +"  "+"TEXT NOT NULL ,"+
 
@@ -103,12 +104,13 @@ public class MonHelper extends SQLiteOpenHelper {
         return (int)db.insert(TABLE_Creature, null, contentValues) ;
 
     }
-    public Boolean  addEquipement(String nom , int point  , Bitmap image, int creatureID){
+    public Boolean  addEquipement(String nom , int point  , Bitmap image, String attribut ,int creatureID){
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_NAME, nom);
-        //contentValues.put(COLUMN_attribut,attribut);
+
         contentValues.put(COLUMN_Point,point);
+        contentValues.put(COLUMN_attribut,attribut);
         contentValues.put(COLUMN_creatureID, creatureID);
 
         ByteArrayOutputStream boas = new ByteArrayOutputStream();
@@ -152,9 +154,9 @@ public class MonHelper extends SQLiteOpenHelper {
         if (equip.moveToFirst())
         {
             do {
-                Equipement q = new Equipement (equip.getString(1),equip.getInt(2));
+                Equipement q = new Equipement (equip.getString(1),equip.getInt(2),equip.getString(4));
                 q.Id=equip.getInt(0);
-                q.CreatureID=equip.getInt(4);
+                q.CreatureID=equip.getInt(5);
                 byte[] image = equip.getBlob(3);
                 q.setImage(BitmapFactory.decodeByteArray(image,0, image.length));
                 equipements.add(q);

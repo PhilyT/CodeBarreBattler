@@ -94,6 +94,7 @@ TextView code ;
         equipements2.add(new Equipement("bouclier", BitmapFactory.decodeResource(this.getResources(), R.mipmap.bouclier), 6, "Defense"));
 
         equipements3.add(new Equipement("baton", BitmapFactory.decodeResource(this.getResources(), R.mipmap.baton), 2, "Attaque"));
+        equipements4.add(new Equipement("baton", BitmapFactory.decodeResource(this.getResources(), R.mipmap.baton), 2, "Attaque"));
 
 
         creatures.add(new Creature("archer", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.archer_squelette), Arrays.copyOf(equipements1.toArray(), 4, Equipement[].class)));
@@ -104,7 +105,7 @@ TextView code ;
 
 
 
-        creatures.add(new Creature("armure", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.armure), Arrays.copyOf(equipements1.toArray(), 4, Equipement[].class)));
+        creatures.add(new Creature("dragon_spectral", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.dragon_spectral), Arrays.copyOf(equipements1.toArray(), 4, Equipement[].class)));
         creatures.add(new Creature("assassiin", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.assassin), Arrays.copyOf(equipements2.toArray(), 3, Equipement[].class)));
         creatures.add(new Creature("dragon_rouge", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.dragon_rouge), Arrays.copyOf(equipements3.toArray(), 1, Equipement[].class)));
         creatures.add(new Creature("dragon_fury", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.dragon_fury), Arrays.copyOf(equipements4.toArray(), 0, Equipement[].class)));

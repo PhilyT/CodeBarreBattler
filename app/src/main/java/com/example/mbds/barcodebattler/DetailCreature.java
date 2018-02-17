@@ -41,14 +41,23 @@ MonHelper database = new MonHelper(this);
 
         Intent intent = getIntent();
         Creature creature =  intent.getParcelableExtra("creature");
+
+
+        mListView =(ListView)findViewById(R.id.equipements);
+        ArrayList<Equipement>equipementsCreat = equipementsCreature(creature);
+
+        if(equipementsCreat!=null && !equipementsCreat.isEmpty()){
+            creature.Equipements = new  Equipement[equipementsCreat.size()];
+            for(int i=0 ; i< equipementsCreat.size();i++) {
+                creature.Equipements[i] = equipementsCreat.get(i);
+            }
+        }
+        System.out.print(creature.Equipements);
         txtNom.setText(creature.Nom);
         txtAttaque.setText("Attaque : "+creature.getAttaque());
         txtPv.setText("PV : "+creature.getPV());
         txtDefense.setText("Defense : "+creature.getDefense());
         image.setImageBitmap(creature.Image);
-
-        mListView =(ListView)findViewById(R.id.equipements);
-        ArrayList<Equipement>equipementsCreat = equipementsCreature(creature);
         DataEquipement dataEquiment = new DataEquipement(DetailCreature.this,equipementsCreat);
         System.out.print("la taille de m"+equipementsCreature(creature).size());
         mListView.setAdapter(dataEquiment);
@@ -89,7 +98,9 @@ MonHelper database = new MonHelper(this);
                     equipementsCreatures.add(e);
                 }
             }
+
         }
+
         return equipementsCreatures ;
     }
     public void initialise(){
