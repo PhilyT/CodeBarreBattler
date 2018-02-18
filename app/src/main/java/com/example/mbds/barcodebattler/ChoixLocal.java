@@ -42,7 +42,8 @@ public class ChoixLocal extends AppCompatActivity {
     ImageView image2;
     Creature creatureSelected1;
     Creature creatureSelected2;
-    Creature[] items;
+    ArrayList<Creature> items;
+    MonHelper  dataBase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,27 +70,20 @@ public class ChoixLocal extends AppCompatActivity {
         image2 = (ImageView) findViewById(R.id.image2);
 
         // Init data
-        Equipement[] equipements1 = new Equipement[]{
-                new Equipement("baton", BitmapFactory.decodeResource(this.getResources(), R.mipmap.baton), 2, "Attaque"),
-                new Equipement("bouclier", BitmapFactory.decodeResource(this.getResources(), R.mipmap.bouclier), 6, "Defense")
-        };
-        Equipement[] equipements2 = new Equipement[]{
-                new Equipement("epee", BitmapFactory.decodeResource(this.getResources(), R.mipmap.epee), 6, "Attaque"),
-                new Equipement("bouclier", BitmapFactory.decodeResource(this.getResources(), R.mipmap.bouclier), 6, "Defense")
-        };
-        Equipement[] equipements3 = new Equipement[]{
-                new Equipement("casque", BitmapFactory.decodeResource(this.getResources(), R.mipmap.casque), 10, "Vie")
-        };
-        items = new Creature[]{// Data for test
-                new Creature("toto", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(),
-                        R.mipmap.archer_squelette), equipements1),
-                new Creature("titi", 30, 8, 8, BitmapFactory.decodeResource(this.getResources(),
-                        R.mipmap.archidiable), equipements2),
-                new Creature("tata", 10, 17, 15, BitmapFactory.decodeResource(this.getResources(),
-                        R.mipmap.archidiablotin), equipements3)
-        };
-        creatureSelected1 = items[0];
-        creatureSelected2 = items[0];
+        dataBase = new MonHelper(this);
+
+        items = dataBase.getAllCreatures();
+        if(items.isEmpty()){
+            //do popup
+            //finish();
+        }
+        for(int i = 0; i<items.size(); i++){
+            ArrayList<Equipement> equips= dataBase.equipementsCreature(items.get(i));
+            items.get(i).Equipements = new Equipement[equips.size()];
+            items.get(i).Equipements = equips.toArray(items.get(i).Equipements);
+        }
+        creatureSelected1 = items.get(0);
+        creatureSelected2 = items.get(0);
         ArrayAdapter<Creature> adapter = new ArrayAdapter<Creature>(this, android.R.layout.simple_spinner_item, items);
         DataEquipement adapterEquipements1 = new DataEquipement(ChoixLocal.this, new ArrayList<Equipement>(Arrays.asList(creatureSelected1.Equipements)));
         DataEquipement adapterEquipements2 = new DataEquipement(ChoixLocal.this, new ArrayList<Equipement>(Arrays.asList(creatureSelected2.Equipements)));
@@ -156,6 +150,9 @@ public class ChoixLocal extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        finish();
+        if(resultCode == 2){
+            finish();
+        }
+
     }
 }

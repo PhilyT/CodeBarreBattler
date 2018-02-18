@@ -52,39 +52,36 @@ public class Creature implements Parcelable {
         int total = PV;
         if (Equipements != null) {
             for (Equipement equipement : Equipements) {
-                if (equipement.Attribut.equals(Attribut.Vie)) {
+                if (equipement.Attribut.equals("Vie")) {
                     total = total + equipement.Point;
                 }
             }
-            return total;
         }
-        return 0 ;
+        return total ;
     }
 
     public int getAttaque() {
         int total = Attaque;
         if (Equipements != null) {
             for (Equipement equipement : Equipements) {
-                if (equipement.Attribut.equals(Attribut.Attaque)) {
+                if (equipement.Attribut.equals("Attaque")) {
                     total = total + equipement.Point;
                 }
             }
-            return total;
         }
-        return 0 ;
+        return total ;
     }
 
     public int getDefense(){
         int total = Defense;
         if(Equipements!=null) {
             for (Equipement equipement : Equipements) {
-                if (equipement.Attribut.equals(Attribut.Defense)) {
+                if (equipement.Attribut.equals("Defense")) {
                     total = total + equipement.Point;
                 }
             }
-            return total;
         }
-        return 0 ;
+        return total ;
     }
 
     protected Creature(Parcel in) {
@@ -96,9 +93,8 @@ public class Creature implements Parcelable {
         Defense = data[2];
         Image = in.readParcelable(Bitmap.class.getClassLoader());
 
-       Parcelable[] dataEquipements = in.readParcelableArray(Equipement.class.getClassLoader());
-        if(dataEquipements!=null){
-       Equipements = Arrays.copyOf(dataEquipements, dataEquipements.length, Equipement[].class);}
+        Equipements= in.createTypedArray(Equipement.CREATOR);
+        //Equipements = Arrays.copyOf(dataEquipements, dataEquipements.length, Equipement[].class);
         Id = in.readInt();
     }
 
@@ -124,7 +120,7 @@ public class Creature implements Parcelable {
         dest.writeString(Nom);
         dest.writeIntArray(new int[] {PV, Attaque, Defense});
         dest.writeParcelable(this.Image,0);
-        dest.writeParcelableArray(Equipements, 1);
+        dest.writeTypedArray(Equipements, 1);
         dest.writeInt(Id);
     }
 

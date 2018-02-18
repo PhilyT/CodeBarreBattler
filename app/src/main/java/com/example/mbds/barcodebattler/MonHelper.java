@@ -170,4 +170,19 @@ public class MonHelper extends SQLiteOpenHelper {
 
     }
 
+    public ArrayList<Equipement> equipementsCreature(Creature creature){
+        ArrayList<Equipement> equipements = getAllEquipements();
+        ArrayList<Equipement> equipementsCreatures = new ArrayList<Equipement>();
+        if(!equipements.isEmpty()) {
+            for (Equipement e : equipements) {
+                if (e.CreatureID == creature.Id) {
+                    equipementsCreatures.add(e);
+                }
+            }
+
+        }
+
+        return equipementsCreatures ;
+    }
+
 }

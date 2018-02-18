@@ -153,6 +153,7 @@ public class CombatLocal extends AppCompatActivity {
                 .setTitle("Fuir");
         builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
+                setResult(2);
                 finish();
             }
         });
@@ -172,6 +173,7 @@ public class CombatLocal extends AppCompatActivity {
                 .setTitle("Victoire");
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
+                setResult(2);
                 finish();
             }
         });

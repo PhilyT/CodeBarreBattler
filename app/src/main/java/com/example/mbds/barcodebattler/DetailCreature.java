@@ -44,7 +44,7 @@ MonHelper database = new MonHelper(this);
 
 
         mListView =(ListView)findViewById(R.id.equipements);
-        ArrayList<Equipement>equipementsCreat = equipementsCreature(creature);
+        ArrayList<Equipement>equipementsCreat = database.equipementsCreature(creature);
 
         if(equipementsCreat!=null && !equipementsCreat.isEmpty()){
             creature.Equipements = new  Equipement[equipementsCreat.size()];
@@ -59,7 +59,7 @@ MonHelper database = new MonHelper(this);
         txtDefense.setText("Defense : "+creature.getDefense());
         image.setImageBitmap(creature.Image);
         DataEquipement dataEquiment = new DataEquipement(DetailCreature.this,equipementsCreat);
-        System.out.print("la taille de m"+equipementsCreature(creature).size());
+        System.out.print("la taille de m"+database.equipementsCreature(creature).size());
         mListView.setAdapter(dataEquiment);
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
@@ -89,20 +89,7 @@ MonHelper database = new MonHelper(this);
             }
         });
     }
-    ArrayList<Equipement> equipementsCreature(Creature creature){
-        ArrayList<Equipement> equipements = database.getAllEquipements();
-        ArrayList<Equipement> equipementsCreatures = new ArrayList<Equipement>();
-        if(!equipements.isEmpty()) {
-            for (Equipement e : equipements) {
-                if (e.CreatureID == creature.Id) {
-                    equipementsCreatures.add(e);
-                }
-            }
 
-        }
-
-        return equipementsCreatures ;
-    }
     public void initialise(){
     }
 }

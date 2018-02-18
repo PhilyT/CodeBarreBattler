@@ -26,7 +26,7 @@ public class Equipement implements Parcelable {
         Nom = nom;
 
         Point = point;
-        Attribut = Attribut.valueOf(attribut);
+        Attribut = attribut;
     }
     public Equipement(){
 
@@ -52,7 +52,7 @@ public Equipement(String nom, Bitmap image , int point , String attribut ,int cr
         String[] valeurs = new String[2];
         in.readStringArray(valeurs);
         Nom = valeurs[0];
-        Attribut = Attribut.valueOf(valeurs[1]);
+        Attribut = valeurs[1];
         Image = in.readParcelable(Bitmap.class.getClassLoader());
     }
 
