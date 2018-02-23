@@ -19,14 +19,7 @@
         android:layout_alignParentTop="true"
         android:textStyle="bold" />
 
-    <TextView android:id="@+id/delete"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:textColor="@android:color/black"
-        android:layout_below="@id/nom"
-        android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@id/image"
-        android:text="delete"/>
+
 
 
 

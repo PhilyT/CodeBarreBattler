@@ -42,7 +42,7 @@ public class Gestion extends AppCompatActivity {
 
         points=  (TextView) findViewById(R.id.points);
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        String[] items = new String[] { "Creatures", "Equipements", "Potions"  };
+        String[] items = new String[] { "Creatures", "Equipements" };
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -86,14 +86,7 @@ public class Gestion extends AppCompatActivity {
                     points.setVisibility(View.INVISIBLE);
 
                 }
-                else if(item.equalsIgnoreCase("Potions")){
 
-                    points.setText(" Reserve de potion"+potion);
-                    points.setVisibility(View.VISIBLE);
-                    mListView.setVisibility(View.INVISIBLE);
-
-
-                }
 
             }
 

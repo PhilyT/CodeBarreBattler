@@ -79,18 +79,12 @@
         <ListView
             android:id="@+id/equipements"
             android:layout_width="match_parent"
-            android:layout_height="200dp">
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp">
 
         </ListView>
 
-        <Spinner
-            android:id="@+id/spinner"
-            style="@style/spinner_style"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="5dp"
-            android:spinnerMode="dropdown" />
+
 
     </LinearLayout>
 

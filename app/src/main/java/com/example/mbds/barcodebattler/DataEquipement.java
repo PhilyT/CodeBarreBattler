@@ -66,13 +66,13 @@ public class DataEquipement implements ListAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         TextView txtNom ;
         ImageView image ;
-        TextView fab;
+
         View returnView ;
         if(view==null){
             returnView= View.inflate(this.context,R.layout.layoutequipement,null);
             txtNom=(TextView) returnView.findViewById(R.id.nom);
             txtNom.setText(equipements.get(i).Nom);
-            fab=(TextView) returnView.findViewById(R.id.delete);
+
 
             if(equipements.get(i).Image != null)
             {

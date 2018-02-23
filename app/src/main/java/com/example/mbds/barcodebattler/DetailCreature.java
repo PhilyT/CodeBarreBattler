@@ -67,26 +67,9 @@ public class DetailCreature extends AppCompatActivity {
         System.out.print("la taille de m"+database.equipementsCreature(creature).size());
         mListView.setAdapter(dataEquiment);
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        String[] items = new String[] { "Equipement1", "Equipement2", "Equipements3"  };
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
-        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        spinner.setAdapter(adapter);
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
-                Log.v("item", (String) parent.getItemAtPosition(i));
-                String item = (String) parent.getItemAtPosition(i);
 
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
         retour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
