@@ -66,7 +66,7 @@ public class CombatLocal extends AppCompatActivity {
         creature1.Equipements = new Equipement[equips1.size()];
         creature1.Equipements = equips1.toArray(creature1.Equipements);
         ArrayList<Equipement> equips2= dataBase.equipementsCreature(creature2);
-        creature2.Equipements = new Equipement[equips1.size()];
+        creature2.Equipements = new Equipement[equips2.size()];
         creature2.Equipements = equips2.toArray(creature2.Equipements);
         creature1.PV = creature1.getPV();
         creature2.PV = creature2.getPV();

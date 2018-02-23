@@ -100,7 +100,7 @@ TextView code ;
         creatures.add(new Creature("archer", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.archer_squelette), Arrays.copyOf(equipements1.toArray(), 4, Equipement[].class)));
         creatures.add(new Creature("chevalier", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.chevalier), Arrays.copyOf(equipements2.toArray(), 3, Equipement[].class)));
         creatures.add(new Creature("beast", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.beast), Arrays.copyOf(equipements3.toArray(), 1, Equipement[].class)));
-        creatures.add(new Creature("diable", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.diable), Arrays.copyOf(equipements4.toArray(), 0, Equipement[].class)));
+        creatures.add(new Creature("diable", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.diable), Arrays.copyOf(equipements4.toArray(), 1, Equipement[].class)));
 
 
 
@@ -108,6 +108,6 @@ TextView code ;
         creatures.add(new Creature("dragon_spectral", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.dragon_spectral), Arrays.copyOf(equipements1.toArray(), 4, Equipement[].class)));
         creatures.add(new Creature("assassiin", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.assassin), Arrays.copyOf(equipements2.toArray(), 3, Equipement[].class)));
         creatures.add(new Creature("dragon_rouge", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.dragon_rouge), Arrays.copyOf(equipements3.toArray(), 1, Equipement[].class)));
-        creatures.add(new Creature("dragon_fury", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.dragon_fury), Arrays.copyOf(equipements4.toArray(), 0, Equipement[].class)));
+        creatures.add(new Creature("dragon_fury", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(), R.mipmap.dragon_fury), Arrays.copyOf(equipements4.toArray(), 1, Equipement[].class)));
     }
 }

@@ -37,8 +37,6 @@ public class ChoixLocal extends AppCompatActivity {
     TextView retour;
     Spinner choix1;
     Spinner choix2;
-    ListView equipementsView1;
-    ListView equipementsView2;
     Button lancer;
     ImageView image1;
     ImageView image2;
@@ -65,8 +63,6 @@ public class ChoixLocal extends AppCompatActivity {
         retour =  (TextView) findViewById(R.id.retour);
         choix1 = (Spinner) findViewById(R.id.choix1);
         choix2 = (Spinner) findViewById(R.id.choix2);
-        equipementsView1 = (ListView) findViewById(R.id.equipements1);
-        equipementsView2 = (ListView) findViewById(R.id.equipements2);
         lancer = (Button) findViewById(R.id.lancer );
         image1 = (ImageView) findViewById(R.id.image1);
         image2 = (ImageView) findViewById(R.id.image2);
@@ -102,8 +98,6 @@ public class ChoixLocal extends AppCompatActivity {
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
 
         // Set Widget
-        equipementsView1.setAdapter(adapterEquipements1);
-        equipementsView2.setAdapter(adapterEquipements2);
         choix1.setAdapter(adapter);
         choix1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -114,7 +108,6 @@ public class ChoixLocal extends AppCompatActivity {
                 attaque1.setText("Attaque : "+creatureSelected1.getAttaque());
                 defense1.setText("Defense : "+creatureSelected1.getDefense());
                 image1.setImageBitmap(creatureSelected1.Image);
-                equipementsView1.setAdapter(new DataEquipement(ChoixLocal.this, new ArrayList<Equipement>(Arrays.asList(creatureSelected1.Equipements))));
             }
 
             @Override
@@ -133,7 +126,6 @@ public class ChoixLocal extends AppCompatActivity {
                 attaque2.setText("Attaque : "+creatureSelected2.getAttaque());
                 defense2.setText("Defense : "+creatureSelected2.getDefense());
                 image2.setImageBitmap(creatureSelected2.Image);
-                equipementsView2.setAdapter(new DataEquipement(ChoixLocal.this, new ArrayList<Equipement>(Arrays.asList(creatureSelected2.Equipements))));
             }
 
             @Override

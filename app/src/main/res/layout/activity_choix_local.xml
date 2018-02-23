@@ -89,12 +89,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <ListView
-            android:id="@+id/equipements1"
-            android:layout_width="match_parent"
-            android:layout_height="100dp">
 
-        </ListView>
 
     </LinearLayout>
 
@@ -104,7 +99,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="25dp"
         style="@style/spinner_style"
         android:spinnerMode="dropdown"/>
 
@@ -174,12 +169,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <ListView
-            android:id="@+id/equipements2"
-            android:layout_width="match_parent"
-            android:layout_height="100dp">
 
-        </ListView>
 
     </LinearLayout>
 
