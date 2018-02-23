@@ -7,7 +7,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.mbds.barcodebattler.CombatLocal">
+    tools:context="com.example.mbds.barcodebattler.CombatLocal"
+    android:background="@drawable/background5">
     <include layout="@layout/header" />
 
     <LinearLayout

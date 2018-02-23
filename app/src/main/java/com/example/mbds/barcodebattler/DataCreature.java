@@ -2,6 +2,7 @@ package com.example.mbds.barcodebattler;
 
 import android.content.Context;
 import android.database.DataSetObserver;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -9,6 +10,9 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import static com.example.mbds.barcodebattler.R.color.blue;
+import static java.security.AccessController.getContext;
 
 /**
  * Created by deptinfo on 13/01/2018.
@@ -80,6 +84,7 @@ public class DataCreature  implements ListAdapter {
         if(creatures.get(i).Image != null)
         {
             image=(ImageView) returnView.findViewById(R.id.image);
+
             image.setImageBitmap(creatures.get(i).Image);
         }
         return returnView;

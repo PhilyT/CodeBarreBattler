@@ -8,7 +8,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.mbds.barcodebattler.ChoixLocal">
+    tools:context="com.example.mbds.barcodebattler.ChoixLocal"
+    android:background="@drawable/background5">
 
     <include layout="@layout/header" />
 

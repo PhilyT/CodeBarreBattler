@@ -3,7 +3,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    tools:context="com.example.mbds.barcodebattler.MainActivity">
+    tools:context="com.example.mbds.barcodebattler.MainActivity"
+    android:background="@drawable/background1">
 
     <TableLayout
         android:layout_width="match_parent"

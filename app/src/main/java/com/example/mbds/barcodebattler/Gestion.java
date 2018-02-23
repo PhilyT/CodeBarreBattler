@@ -60,6 +60,7 @@ public class Gestion extends AppCompatActivity {
                     final DataCreature dataCreature = new DataCreature(Gestion.this,creatures);
 
                     mListView.setAdapter(dataCreature);
+
                     mListView.setVisibility(View.VISIBLE);
                     points.setVisibility(View.INVISIBLE);
                     mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
