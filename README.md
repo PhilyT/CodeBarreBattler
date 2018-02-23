@@ -5,6 +5,12 @@
 Tom Phily  
 Aïchatou Traoré  
 
+## Fonctionnalité implémentée
+* Gestion des créatures/equipements
+* Ajout de creature avec leurs équipements par scan de code barre
+* Persistance des créatures en base de données avec sérialization
+* Combat local entre deux créatures sur le même téléphone
+
 ## Sujet
 
 Développez une application android sur le même principe que la console vintage “Barcode Battler”.  
@@ -13,9 +19,9 @@ Il s’agit donc de concevoir un jeu qui permet :
 * Ajoute des créatures / équipements / potions  en scannant des codes barres.
 * Lancer un combat en local en faisant affronter deux créatures sur le même téléphone.
 * Lancer un combat en réseau.  
-
-
-
+  
+  
+  
 Un code barre scanné donnera toujours le même résultat (je vous conseil de prendre le hash de la valeur du code-barre pour obtenir une longue chaine et splitter la chaîne pour obtenir vos valeurs).  
 
 Le réseau fonctionnera par échange de fichiers XML.  
