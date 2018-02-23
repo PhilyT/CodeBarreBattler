@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class CombatLocal extends AppCompatActivity {
@@ -34,6 +35,7 @@ public class CombatLocal extends AppCompatActivity {
     Creature creature1;
     Creature creature2;
     int potionCpt;
+    MonHelper  dataBase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +58,16 @@ public class CombatLocal extends AppCompatActivity {
 
         // Initialize Data
         Intent intent = getIntent();
+        dataBase = new MonHelper(this);
         tourCreature1 = true;
         creature1 = (Creature)intent.getParcelableExtra("Creature1");
         creature2 = (Creature)intent.getParcelableExtra("Creature2");
+        ArrayList<Equipement> equips1= dataBase.equipementsCreature(creature1);
+        creature1.Equipements = new Equipement[equips1.size()];
+        creature1.Equipements = equips1.toArray(creature1.Equipements);
+        ArrayList<Equipement> equips2= dataBase.equipementsCreature(creature2);
+        creature2.Equipements = new Equipement[equips1.size()];
+        creature2.Equipements = equips2.toArray(creature2.Equipements);
         creature1.PV = creature1.getPV();
         creature2.PV = creature2.getPV();
         potionCpt = 30;

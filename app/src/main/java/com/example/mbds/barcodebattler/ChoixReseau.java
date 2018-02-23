@@ -45,6 +45,8 @@ public class ChoixReseau extends AppCompatActivity {
     Creature creatureAdverse;
     AcceptThread server;
     ConnectedThread client;
+    ArrayList<Creature> items;
+    MonHelper  dataBase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,26 +70,29 @@ public class ChoixReseau extends AppCompatActivity {
 
         // Init data
         sendCreature = false;
-        Equipement[] equipements1 = new Equipement[]{
-                new Equipement("baton", BitmapFactory.decodeResource(this.getResources(), R.mipmap.baton), 2, "Attaque"),
-                new Equipement("bouclier", BitmapFactory.decodeResource(this.getResources(), R.mipmap.bouclier), 6, "Defense")
-        };
-        Equipement[] equipements2 = new Equipement[]{
-                new Equipement("epee", BitmapFactory.decodeResource(this.getResources(), R.mipmap.epee), 6, "Attaque"),
-                new Equipement("bouclier", BitmapFactory.decodeResource(this.getResources(), R.mipmap.bouclier), 6, "Defense")
-        };
-        Equipement[] equipements3 = new Equipement[]{
-                new Equipement("casque", BitmapFactory.decodeResource(this.getResources(), R.mipmap.casque), 10, "Vie")
-        };
-        Creature[] items = new Creature[]{// Data for test
-                new Creature("toto", 30, 4, 12, BitmapFactory.decodeResource(this.getResources(),
-                        R.mipmap.archer_squelette),equipements1),
-                new Creature("titi", 30, 8, 8, BitmapFactory.decodeResource(this.getResources(),
-                        R.mipmap.archidiable),equipements2),
-                new Creature("tata", 10, 17, 15, BitmapFactory.decodeResource(this.getResources(),
-                        R.mipmap.archidiablotin), equipements3)
-        };
-        creatureSelected = items[0];
+        dataBase = new MonHelper(this);
+
+        items = dataBase.getAllCreatures();
+        if(items.isEmpty()){
+            AlertDialog.Builder builder = new AlertDialog.Builder(ChoixReseau.this);
+
+            builder.setMessage("Il faut scanner des créatures avant !")
+                    .setTitle("Chargment creatures");
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    finish();
+                }
+            });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+        for(int i = 0; i<items.size(); i++){
+            ArrayList<Equipement> equips= dataBase.equipementsCreature(items.get(i));
+            items.get(i).Equipements = new Equipement[equips.size()];
+            items.get(i).Equipements = equips.toArray(items.get(i).Equipements);
+        }
+        creatureSelected = items.get(0);
         ArrayAdapter<Creature> adapter = new ArrayAdapter<Creature>(this, android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         DataEquipement adapterEquipements1 = new DataEquipement(ChoixReseau.this, new ArrayList<Equipement>(Arrays.asList(creatureSelected.Equipements)));

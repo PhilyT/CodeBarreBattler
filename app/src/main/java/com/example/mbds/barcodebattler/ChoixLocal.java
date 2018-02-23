@@ -1,5 +1,7 @@
 package com.example.mbds.barcodebattler;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
@@ -74,8 +76,18 @@ public class ChoixLocal extends AppCompatActivity {
 
         items = dataBase.getAllCreatures();
         if(items.isEmpty()){
-            //do popup
-            //finish();
+            AlertDialog.Builder builder = new AlertDialog.Builder(ChoixLocal.this);
+
+            builder.setMessage("Il faut scanner des créatures avant !")
+                    .setTitle("Chargment creatures");
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    finish();
+                }
+            });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
         }
         for(int i = 0; i<items.size(); i++){
             ArrayList<Equipement> equips= dataBase.equipementsCreature(items.get(i));
@@ -140,6 +152,8 @@ public class ChoixLocal extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ChoixLocal.this,CombatLocal.class);
+                creatureSelected1.Equipements = null;
+                creatureSelected2.Equipements = null;
                 intent.putExtra("Creature1", creatureSelected1);
                 intent.putExtra("Creature2", creatureSelected2);
                 startActivityForResult(intent,1);
