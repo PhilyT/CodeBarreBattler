@@ -184,5 +184,15 @@ public class MonHelper extends SQLiteOpenHelper {
 
         return equipementsCreatures ;
     }
+    public void removeEquipement(Equipement e){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_Equipement, COLUMN_IDE + "="+e.Id, null);
+        db.close();
+    }
+    public void removeCreature(Creature c){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_Creature, COLUMN_ID + "="+c.Id, null);
+        db.close();
+    }
 
 }

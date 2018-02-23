@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -26,12 +27,16 @@ public class DetailCreature extends AppCompatActivity {
     TextView txtNom ,txtPv, txtAttaque, txtDefense, retour;
     ImageView image ;
     ListView mListView;
-MonHelper database = new MonHelper(this);
+    Button delete ;
+    ArrayList<Equipement>equipementsCreat;
+    Creature creature;
+    MonHelper database = new MonHelper(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_creature);
-        initialise();
+
+        delete =(Button)findViewById(R.id.suppression);
         retour =  (TextView) findViewById(R.id.retour);
         txtNom=(TextView)findViewById(R.id.nom);
         txtPv=(TextView)findViewById(R.id.pv);
@@ -40,11 +45,11 @@ MonHelper database = new MonHelper(this);
         image = (ImageView)findViewById(R.id.image) ;
 
         Intent intent = getIntent();
-        Creature creature =  intent.getParcelableExtra("creature");
+        creature =  intent.getParcelableExtra("creature");
 
 
         mListView =(ListView)findViewById(R.id.equipements);
-        ArrayList<Equipement>equipementsCreat = database.equipementsCreature(creature);
+        equipementsCreat = database.equipementsCreature(creature);
 
         if(equipementsCreat!=null && !equipementsCreat.isEmpty()){
             creature.Equipements = new  Equipement[equipementsCreat.size()];
@@ -88,8 +93,25 @@ MonHelper database = new MonHelper(this);
                 finish();
             }
         });
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (creature != null) {
+                    if (creature.Equipements != null) {
+
+                        for (int i = 0; i < creature.Equipements.length; i++) {
+                            database.removeEquipement(creature.Equipements[i]);
+                        }
+
+                    }
+                    database.removeCreature(creature);
+                    Intent i = new Intent(DetailCreature.this, Gestion.class);  //your class
+                    startActivity(i);
+                    finish();
+                }
+            }
+        });
+
     }
 
-    public void initialise(){
-    }
 }
